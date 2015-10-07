@@ -1,6 +1,3 @@
-Tele-Op Code Layout
-
-
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 
@@ -14,8 +11,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
- * TeleOp Mode
- */
+* TeleOp Mode
+*/
 public class TeleOp extends OpMode {
 
 	/**
@@ -27,7 +24,7 @@ public class TeleOp extends OpMode {
 
 	/*
 	 * Code to run when the op mode is first enabled goes here
-	 * Used for assigning motors to variables, 
+	 * Used for assigning motors to variables, setting start positions
 	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
 	 */
 	@Override
@@ -38,10 +35,15 @@ public class TeleOp extends OpMode {
 		motorLeft1 = hardwareMap.dcMotor.get("motor_1");
 		motorLeft2 = hardwareMap.dcMotor.get("motor_2");
       motorArmBase = hardwareMap.dcMotor.get("motor_5");
+      motorCatcherRight = hardwareMap.dcMotor.get("motor_6");
+      motorCatcherLeft = hardwareMap.dcMotor.get("motor_7");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
 		
-		arm = hardwareMap.servo.get("servo_1");
-		claw = hardwareMap.servo.get("servo_6");
+		shoulder = hardwareMap.servo.get("servo_1");
+      elbow = hardwareMap.servo.get("server_2");
+		claw = hardwareMap.servo.get("servo_3");
+      catcherR = hardwareMap.servo.get("server_4");
+      catcherL = hardwareMap.servo.get("server_5");
 
 		// assign the starting position of the wrist and claw
 		armPosition = 0.2;
@@ -79,7 +81,7 @@ public class TeleOp extends OpMode {
 		
 		// write the values to the motors
 		motorRight1.setPower(right);
-		motorRIght2.setPower(right);
+		motorRight2.setPower(right);
 		motorLeft1.setPower(left);
 		motorLeft2.setPower(left);
 
