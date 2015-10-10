@@ -69,11 +69,15 @@ public class TKLTeleOp extends OpMode {
     @Override
     public void init() {
 
+//        Right Tread DC Motors
         motorRight1 = hardwareMap.dcMotor.get("motor_3");
         motorRight2 = hardwareMap.dcMotor.get("motor_4");
+//        Left Tread DC Motors
         motorLeft1 = hardwareMap.dcMotor.get("motor_1");
         motorLeft2 = hardwareMap.dcMotor.get("motor_2");
+//        Rotating Arm Base Motor
         motorArmBase = hardwareMap.dcMotor.get("motor_5");
+//        Catcher
         motorCatcherRight = hardwareMap.dcMotor.get("motor_6");
         motorCatcherLeft = hardwareMap.dcMotor.get("motor_7");
         motorLeft1.setDirection(DcMotor.Direction.REVERSE);
@@ -131,6 +135,36 @@ public class TKLTeleOp extends OpMode {
 * Code for Controller 2
 *
 */
+
+        // update the position of the arm.
+        if (gamepad1.a) {
+            // if the A button is pushed on gamepad1, increment the position of
+            // the arm servo.
+            armPosition += armDelta;
+        }
+
+        if (gamepad1.y) {
+            // if the Y button is pushed on gamepad1, decrease the position of
+            // the arm servo.
+            armPosition -= armDelta;
+        }
+
+        // update the position of the claw
+        if (gamepad2.left_bumper) {
+            clawPosition += clawDelta;
+        }
+
+        if (gamepad2.right_bumper) {
+            clawPosition -= clawDelta;
+        }
+
+        // clip the position values so that they never exceed their allowed range.
+        armPosition = Range.clip(armPosition, ARM_MIN_RANGE, ARM_MAX_RANGE);
+        clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
+
+        // write position values to the elbow, shoulder and claw servo
+        shoulder.setPosition(shoulderPosition);
+        claw.setPosition(clawPosition);
 
 
 /*
