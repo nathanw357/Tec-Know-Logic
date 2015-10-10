@@ -159,7 +159,8 @@ public class TKLTeleOp extends OpMode {
         }
 
         // clip the position values so that they never exceed their allowed range.
-        armPosition = Range.clip(armPosition, ARM_MIN_RANGE, ARM_MAX_RANGE);
+        shoulderPosition = Range.clip(elbowPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
+        elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
         clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
 
         // write position values to the elbow, shoulder and claw servo
