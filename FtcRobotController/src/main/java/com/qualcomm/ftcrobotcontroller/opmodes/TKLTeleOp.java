@@ -138,6 +138,16 @@ public class TKLTeleOp extends OpMode {
 *
 */
 
+//      ShoulderTilt Variable is set to Left Stick's Y Axis
+        float ShoulderTilt = gamepad2.left_stick_y;
+
+//      ShoulderRotation Variable is set to Left Stick's X Axis
+        float ShoulderRotation = gamepad2.left_stick_x;
+
+//      ElbowTilt Variable is set to Right Stick's Y Axis & ClawTilt Variable is set to Right Stick's X Axis
+        float ElbowTilt = gamepad2.right_stick_y;
+        float ClawTilt = gamepad2.right_stick_x;
+
         // update the position of the claw
         if (gamepad2.left_bumper) {
             clawPosition += clawDelta;
@@ -148,12 +158,12 @@ public class TKLTeleOp extends OpMode {
         }
 
         // clip the position values so that they never exceed their allowed range.
-        shoulderPosition = Range.clip(elbowPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
+        shoulderPosition = Range.clip(shoulderPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
         elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
         clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
 
         // write position values to the elbow, shoulder and claw servo
-        shoulder.setPosition(shoulderPosition);
+        shoulder.setPosition(ShoulderTilt);
         claw.setPosition(clawPosition);
 
 
