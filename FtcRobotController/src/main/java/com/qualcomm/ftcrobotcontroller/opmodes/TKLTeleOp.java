@@ -21,16 +21,22 @@ public class TKLTeleOp extends OpMode {
     final static double CLAW_MAX_RANGE  = 0.7;
 
     // position of the arm servo.
-    double armPosition;
+    double elbowPosition;
 
     // amount to change the arm servo position.
-    double armDelta = 0.1;
+    double elbowDelta = 0.1;
 
     // position of the claw servo
     double clawPosition;
 
     // amount to change the claw servo position by
     double clawDelta = 0.1;
+
+    // position of the claw servo
+    double shoulderPosition;
+
+    // amount to change the claw servo position by
+    double shoulderDelta = 0.1;
 
 //    Setting of Variables to DcMotor / Servo
     DcMotor motorRight1;
@@ -134,6 +140,7 @@ public class TKLTeleOp extends OpMode {
 
         telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
+        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
