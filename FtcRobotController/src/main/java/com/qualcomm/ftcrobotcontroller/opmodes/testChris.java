@@ -5,8 +5,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
  */
 public class testChris extends OpMode {
 
-    DcMotor
-
+    DcMotor motorRight;
 }
 //test update
 
