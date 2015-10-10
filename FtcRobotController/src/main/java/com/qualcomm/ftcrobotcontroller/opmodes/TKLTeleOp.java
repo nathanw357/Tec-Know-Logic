@@ -141,6 +141,7 @@ public class TKLTeleOp extends OpMode {
 //      ShoulderTilt Variable is set to Left Stick's Y Axis
         float ShoulderTilt = gamepad2.left_stick_y;
 
+        shoulderPosition += ShoulderTilt;
 //      ShoulderRotation Variable is set to Left Stick's X Axis
         float ShoulderRotation = gamepad2.left_stick_x;
 
