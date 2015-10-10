@@ -15,10 +15,12 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class TKLTeleOp extends OpMode {
 
-    final static double ARM_MIN_RANGE  = 0.20;
-    final static double ARM_MAX_RANGE  = 0.90;
+    final static double ELBOW_MIN_RANGE  = 0.20;
+    final static double ELBOW_MAX_RANGE  = 0.90;
     final static double CLAW_MIN_RANGE  = 0.20;
     final static double CLAW_MAX_RANGE  = 0.7;
+    final static double SHOULDER_MIN_RANGE  = 0.20;
+    final static double SHOULDER_MAX_RANGE  = 0.7;
 
     // position of the arm servo.
     double elbowPosition;
@@ -135,19 +137,6 @@ public class TKLTeleOp extends OpMode {
 * Code for Controller 2
 *
 */
-
-        // update the position of the arm.
-        if (gamepad1.a) {
-            // if the A button is pushed on gamepad1, increment the position of
-            // the arm servo.
-            armPosition += armDelta;
-        }
-
-        if (gamepad1.y) {
-            // if the Y button is pushed on gamepad1, decrease the position of
-            // the arm servo.
-            armPosition -= armDelta;
-        }
 
         // update the position of the claw
         if (gamepad2.left_bumper) {
