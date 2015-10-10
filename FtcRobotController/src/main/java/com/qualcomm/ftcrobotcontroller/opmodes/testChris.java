@@ -3,9 +3,11 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 /**
  * Created by owner on 10/9/2015.
  */
-public class testChris extends OpMode {
+public class testChris {
+Dc
 
-    DcMotor motorRight;
 }
+
 //test update
 
+//todo stuffs in this document
