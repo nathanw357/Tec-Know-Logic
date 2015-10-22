@@ -2,7 +2,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by nicole on 10/15/2015.
@@ -10,12 +9,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class CowcatcherTest extends OpMode {
 
     //Dcmotors at the base of the cowcatcher on the robot
+    //Control up and down motion
     DcMotor baseRight;
     DcMotor baseLeft;
 
-    //Servos controlling the angle of the front part of the cowcatcher
-    Servo topRight;
-    Servo topLeft;
 
     public CowcatcherTest() {
 
@@ -25,9 +22,6 @@ public class CowcatcherTest extends OpMode {
 
         baseRight = hardwareMap.dcMotor.get("motor_6");
         baseLeft = hardwareMap.dcMotor.get("motor_7");
-
-        topRight = hardwareMap.servo.get("server_4");
-        topLeft = hardwareMap.servo.get("server_5");
 
         baseLeft.setDirection(DcMotor.Direction.REVERSE);
 
@@ -40,9 +34,11 @@ public class CowcatcherTest extends OpMode {
         boolean cowUp = gamepad1.right_bumper;
         float cowDown = gamepad1.right_trigger;
 
+        //Controls the direction of the cowcatcher and speed
         float speed = 0;
-        float angle = 0.2f;
 
+        //Senses which button is pressed and sets direction/speed
+        //If none pressed it stops motion
         if(gamepad1.right_bumper){
             speed = 1;
         }
