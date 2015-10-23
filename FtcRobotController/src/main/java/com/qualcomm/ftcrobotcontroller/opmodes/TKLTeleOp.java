@@ -72,29 +72,29 @@ public class TKLTeleOp extends OpMode {
     public void init() {
 
 //        Right Tread DC Motors
-//        motorRight1 = hardwareMap.dcMotor.get("motor_3");
-//        motorRight2 = hardwareMap.dcMotor.get("motor_4");
+        motorRight1 = hardwareMap.dcMotor.get("motor_3");
+        motorRight2 = hardwareMap.dcMotor.get("motor_4");
 //        Left Tread DC Motors
         motorLeft1 = hardwareMap.dcMotor.get("motor_1");
         motorLeft2 = hardwareMap.dcMotor.get("motor_2");
-//        Rotating Arm Base Motor
-//        motorArmBase = hardwareMap.dcMotor.get("motor_5");
-//        Catcher
-//        motorCatcherRight = hardwareMap.dcMotor.get("motor_6");
-//        motorCatcherLeft = hardwareMap.dcMotor.get("motor_7");
+       // Rotating Arm Base Motor
+        motorArmBase = hardwareMap.dcMotor.get("motor_5");
+      //  Catcher
+        motorCatcherRight = hardwareMap.dcMotor.get("motor_6");
+        motorCatcherLeft = hardwareMap.dcMotor.get("motor_7");
         motorLeft1.setDirection(DcMotor.Direction.REVERSE);
         motorLeft2.setDirection(DcMotor.Direction.REVERSE);
 
-//        shoulder = hardwareMap.servo.get("servo_1");
-//        elbow = hardwareMap.servo.get("server_2");
-//        claw = hardwareMap.servo.get("servo_3");
-//        catcherR = hardwareMap.servo.get("server_4");
-//        catcherL = hardwareMap.servo.get("server_5");
+        shoulder = hardwareMap.servo.get("servo_1");
+        elbow = hardwareMap.servo.get("server_2");
+        claw = hardwareMap.servo.get("servo_3");
+        catcherR = hardwareMap.servo.get("server_4");
+        catcherL = hardwareMap.servo.get("server_5");
 
         // assign the starting position of the wrist and claw
-//        shoulderPosition = 0.2;
-//        clawPosition = 0.2;
-//        elbowPosition = 0.2;
+        shoulderPosition = 0.2;
+        clawPosition = 0.2;
+       elbowPosition = 0.2;
 
     }
 
@@ -126,8 +126,8 @@ public class TKLTeleOp extends OpMode {
         left =  (float)scaleInput(left);
 
         // write the values to the motors
-//        motorRight1.setPower(right);
-  //      motorRight2.setPower(right);
+        motorRight1.setPower(right);
+        motorRight2.setPower(right);
         motorLeft1.setPower(left);
         motorLeft2.setPower(left);
 
@@ -139,33 +139,33 @@ public class TKLTeleOp extends OpMode {
 */
 
 //      ShoulderTilt Variable is set to Left Stick's Y Axis
-    //    float ShoulderTilt = gamepad2.left_stick_y;
+        float ShoulderTilt = gamepad2.left_stick_y;
 
-      //  shoulderPosition += ShoulderTilt;
+        shoulderPosition += ShoulderTilt;
 //      ShoulderRotation Variable is set to Left Stick's X Axis
-        //float ShoulderRotation = gamepad2.left_stick_x;
+        float ShoulderRotation = gamepad2.left_stick_x;
 
 //      ElbowTilt Variable is set to Right Stick's Y Axis & ClawTilt Variable is set to Right Stick's X Axis
-        //float ElbowTilt = gamepad2.right_stick_y;
-        //float ClawTilt = gamepad2.right_stick_x;
+        float ElbowTilt = gamepad2.right_stick_y;
+        float ClawTilt = gamepad2.right_stick_x;
 
         // update the position of the claw
-        //if (gamepad2.left_bumper) {
-        //    clawPosition += clawDelta;
-       // }
+        if (gamepad2.left_bumper) {
+            clawPosition += clawDelta;
+        }
 
-        //if (gamepad2.right_bumper) {
-          //  clawPosition -= clawDelta;
-       // }
+        if (gamepad2.right_bumper) {
+          clawPosition -= clawDelta;
+        }
 
-        // clip the position values so that they never exceed their allowed range.
-        //shoulderPosition = Range.clip(shoulderPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
-       // elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
-        //clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
+        clip the position values so that they never exceed their allowed range.
+        shoulderPosition = Range.clip(shoulderPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
+        elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
+        clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
 
         // write position values to the elbow, shoulder and claw servo
-        //shoulder.setPosition(ShoulderTilt);
-        //claw.setPosition(clawPosition);
+        shoulder.setPosition(ShoulderTilt);
+        claw.setPosition(clawPosition);
 
 
 /*
@@ -174,11 +174,11 @@ public class TKLTeleOp extends OpMode {
 */
 
         telemetry.addData("Text", "*** Robot Data***");
-        //telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
-        //telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
-        //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
+        telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
+        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
+        telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-        //telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
 
 
     }
@@ -229,4 +229,3 @@ public class TKLTeleOp extends OpMode {
     }
 
 }
-//temporaryy
