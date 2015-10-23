@@ -32,7 +32,7 @@ public class ExampleTeleopTankMode extends OpMode {
             leftMotor.setPower(leftY);
             rightMotor.setPower(rightY);
 
-        telemetry.addData("Text", "*** Robot Data***");
+        telemetry.addData("Text", "** Robot Data**");
         //telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
         //telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));

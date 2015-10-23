@@ -25,7 +25,7 @@ public class TKLTeleOp extends OpMode {
     // position of the arm servo.
     double elbowPosition;
 
-    // amount to change the arm servo position.
+    // amount to change the arm servo position..
     double elbowDelta = 0.1;
 
     // position of the claw servo
