@@ -158,7 +158,7 @@ public class TKLTeleOp extends OpMode {
           clawPosition -= clawDelta;
         }
 
-        clip the position values so that they never exceed their allowed range.
+        //clip the position values so that they never exceed their allowed range.
         shoulderPosition = Range.clip(shoulderPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
         elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
         clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
