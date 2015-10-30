@@ -66,6 +66,66 @@ public class ExampleTeleopTankMode extends OpMode {
         //     elbowPosition = 0.2;
     }
 
+    private float DcMotorPower(float power) {
+
+        int Step = Counter % 10;
+
+        if (Math.abs(power) == 0) {
+            return (Math.signum(power));
+        }
+
+        else if (Math.abs(power) < 0.1){
+            if (Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.2) {
+            if (Step == 0 || Step == 5) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.3) {
+            if (Step == 3 || Step == 6 || Step == 9) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.4) {
+            if (Step == 2 || Step == 4 || Step == 6 || Step == 8) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.5) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 7 || Step == 9) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.6) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.7) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.8) {
+            if (Step == 1 || Step == 3 || Step == 4 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.9) {
+            if (Step == 1 || Step == 2 || Step == 3 || Step == 4 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else {
+            return (Math.signum(power));
+        }
+
+        return 0;
+    }
+
     @Override
     public void loop() {
 
@@ -86,225 +146,22 @@ public class ExampleTeleopTankMode extends OpMode {
     //    shoulder.setPosition(shoulderPosition);
         // claw.setPosition(clawPosition);
 //      DC Motor code
-        if (Counter >= 10) {
 
-            Counter = 0;
-
-        }
         float leftY = -gamepad1.left_stick_y;
-        float left2Y = -gamepad1.left_stick_y;
         float rightY = gamepad1.right_stick_y;
-        float right2Y = gamepad1.right_stick_y;
 
-        if (Math.abs(leftY) == 0) {
-            leftMotorFront.setPower(Math.signum(0));
-            leftMotorRear.setPower(Math.signum(0));
-        }
+        leftMotorFront.setPower(DcMotorPower(leftY));
+        leftMotorRear.setPower(DcMotorPower(leftY));
+        rightMotorFront.setPower(DcMotorPower(rightY));
+        rightMotorRear.setPower(DcMotorPower(rightY));
 
-        else if (Math.abs(leftY) < 0.1){
-            if (Counter == 0) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.2) {
-            if (Counter == 0 || Counter == 5) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.3) {
-            if (Counter == 3 || Counter == 6 || Counter == 9) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.4) {
-            if (Counter == 2 || Counter == 4 || Counter == 6 || Counter == 8) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.5) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 7 || Counter == 9) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.6) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 7 || Counter == 9 || Counter == 0) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.7) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.8) {
-            if (Counter == 1 || Counter == 3 || Counter == 4 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(leftY) < 0.9) {
-            if (Counter == 1 || Counter == 2 || Counter == 3 || Counter == 4 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                leftMotorFront.setPower(Math.signum(leftY));
-                leftMotorRear.setPower(Math.signum(left2Y));
-            }
-            else {
-                leftMotorFront.setPower(Math.signum(0));
-                leftMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else {
 
-            leftMotorFront.setPower(Math.signum(leftY));
-            leftMotorRear.setPower(Math.signum(left2Y));
-        }
-
-        if (Math.abs(rightY) == 0) {
-            rightMotorFront.setPower(Math.signum(0));
-            rightMotorRear.setPower(Math.signum(0));
-        }
-
-        else if (Math.abs(rightY) < 0.1){
-            if (Counter == 0) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.2) {
-            if (Counter == 0 || Counter == 5) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.3) {
-            if (Counter == 3 || Counter == 6 || Counter == 9) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.4) {
-            if (Counter == 2 || Counter == 4 || Counter == 6 || Counter == 8) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.5) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 7 || Counter == 9) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.6) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 7 || Counter == 9 || Counter == 0) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.7) {
-            if (Counter == 1 || Counter == 3 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.8) {
-            if (Counter == 1 || Counter == 3 || Counter == 4 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else if (Math.abs(rightY) < 0.9) {
-            if (Counter == 1 || Counter == 2 || Counter == 3 || Counter == 4 || Counter == 5 || Counter == 6 || Counter == 7 || Counter == 9 || Counter == 0) {
-                rightMotorFront.setPower(Math.signum(rightY));
-                rightMotorRear.setPower(Math.signum(right2Y));
-            }
-            else {
-                rightMotorFront.setPower(Math.signum(0));
-                rightMotorRear.setPower(Math.signum(0));
-            }
-        }
-        else {
-
-            rightMotorFront.setPower(Math.signum(rightY));
-            rightMotorRear.setPower(Math.signum(right2Y));
-        }
         telemetry.addData("Text", "** Robot Data**");
 //        telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
         //telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));
         telemetry.addData("rightY tgt pwr", "rightY  pwr: " + String.format("%.2f", rightY));
-        telemetry.addData("left2Y tgt pwr", "left2Y  pwr: " + String.format("%.2f", left2Y));
-        telemetry.addData("right2Y tgt pwr", "right2Y  pwr: " + String.format("%.2f", right2Y));
         telemetry.addData("Count: ", count++);
         //telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
         Counter++;
