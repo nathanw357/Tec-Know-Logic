@@ -145,6 +145,7 @@ public class ExampleTeleopTankMode extends OpMode {
         // write position values to the elbow, shoulder and claw servo
     //    shoulder.setPosition(shoulderPosition);
         // claw.setPosition(clawPosition);
+
 //      DC Motor code
 
         float leftY = -gamepad1.left_stick_y;
@@ -157,7 +158,7 @@ public class ExampleTeleopTankMode extends OpMode {
 
 
         telemetry.addData("Text", "** Robot Data**");
-//        telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
+        //telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
         //telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));

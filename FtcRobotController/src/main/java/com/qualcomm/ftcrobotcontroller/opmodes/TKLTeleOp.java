@@ -1,231 +1,206 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-
-/**
- * Imports - Used to make references to other code in the project; adding functionality
- */
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-/**
- * TeleOp Mode
- */
 public class TKLTeleOp extends OpMode {
 
     final static double ELBOW_MIN_RANGE  = 0.20;
     final static double ELBOW_MAX_RANGE  = 0.90;
     final static double CLAW_MIN_RANGE  = 0.20;
     final static double CLAW_MAX_RANGE  = 0.7;
-    final static double SHOULDER_MIN_RANGE  = 0.20;
-    final static double SHOULDER_MAX_RANGE  = 0.7;
+    final static double WRIST_MIN_RANGE = 0.20;
+    final static double WRIST_MAX_RANGE = 0.7;
 
-    // position of the arm servo.
+//  Position of the arm servo
     double elbowPosition;
 
-    // amount to change the arm servo position..
+//  Amount to change the arm servo position by
     double elbowDelta = 0.1;
 
-    // position of the claw servo
+//  Position of the claw servo
     double clawPosition;
 
-    // amount to change the claw servo position by
+//  Amount to change the claw servo position by
     double clawDelta = 0.1;
 
-    // position of the claw servo
-    double shoulderPosition;
+//  Position of the Wrist Servo
+    double wristPosition;
 
-    // amount to change the claw servo position by
-    double shoulderDelta = 0.1;
+//  Amount to change the Wrist Servo by
+    double wristDelta = 0.1;
 
-//    Setting of Variables to DcMotor / Servo
-    DcMotor motorRight1;
-    DcMotor motorRight2;
-    DcMotor motorLeft1;
-    DcMotor motorLeft2;
-    DcMotor motorArmBase;
-    DcMotor motorCatcherRight;
-    DcMotor motorCatcherLeft;
 
-    Servo shoulder;
+    DcMotor leftMotorFront;
+    DcMotor leftMotorRear;
+    DcMotor rightMotorFront;
+    DcMotor rightMotorRear;
+    DcMotor ShoulderX;
+    DcMotor ShoulderY;
+
+    Servo wrist;
     Servo elbow;
     Servo claw;
     Servo catcherR;
     Servo catcherL;
+    int count=1;
+    int Counter=0;
 
-
-    /**
-     * Constructor
-     */
-    public TKLTeleOp() {
-
-    }
-
-    /*
-     * Code to run when the op mode is first enabled goes here
-     * Used for assigning motors to variables, setting start positions
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
-     */
     @Override
     public void init() {
 
-//        Right Tread DC Motors
-        motorRight1 = hardwareMap.dcMotor.get("motor_3");
-        motorRight2 = hardwareMap.dcMotor.get("motor_4");
-//        Left Tread DC Motors
-        motorLeft1 = hardwareMap.dcMotor.get("motor_1");
-        motorLeft2 = hardwareMap.dcMotor.get("motor_2");
-       // Rotating Arm Base Motor
-        motorArmBase = hardwareMap.dcMotor.get("motor_5");
-      //  Catcher
-        motorCatcherRight = hardwareMap.dcMotor.get("motor_6");
-        motorCatcherLeft = hardwareMap.dcMotor.get("motor_7");
-        motorLeft1.setDirection(DcMotor.Direction.REVERSE);
-        motorLeft2.setDirection(DcMotor.Direction.REVERSE);
+        Counter = 0;
+//      DcMotors being linked to variable that links to DcMotor inputs on phone
+        leftMotorFront = hardwareMap.dcMotor.get("leftMotorFront");
+        leftMotorRear = hardwareMap.dcMotor.get("leftMotorRear");
+        rightMotorFront = hardwareMap.dcMotor.get("rightMotorFront");
+        rightMotorRear = hardwareMap.dcMotor.get("rightMotorRear");
+        ShoulderX = hardwareMap.dcMotor.get("ShoulderX");
+        ShoulderY = hardwareMap.dcMotor.get("ShoulderY");
 
-        shoulder = hardwareMap.servo.get("servo_1");
-        elbow = hardwareMap.servo.get("server_2");
-        claw = hardwareMap.servo.get("servo_3");
-        catcherR = hardwareMap.servo.get("server_4");
-        catcherL = hardwareMap.servo.get("server_5");
+//      Servos being linked to variable that links to servo input on phone
+        elbow = hardwareMap.servo.get("elbow");
+        claw = hardwareMap.servo.get("claw");
+        wrist = hardwareMap.servo.get("wrist");
+        catcherR = hardwareMap.servo.get("catcherR");
+        catcherL = hardwareMap.servo.get("catcherL");
 
-        // assign the starting position of the wrist and claw
-        shoulderPosition = 0.2;
+//      Starting position for servos
+        elbowPosition = 0.2;
         clawPosition = 0.2;
-       elbowPosition = 0.2;
+        wristPosition = 0.2;
 
     }
 
-    /*
-     * This code is called repeatedly in a loop
-     * It’s used for detecting controls and sending the Robot’s data to the driver station
-     */
+//    Dc Motor pulsing to alter speed
+
+    private float DcMotorPower(float power) {
+
+        int Step = Counter % 10;
+
+        if (Math.abs(power) == 0) {
+            return (Math.signum(power));
+        }
+
+        else if (Math.abs(power) < 0.1){
+            if (Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.2) {
+            if (Step == 0 || Step == 5) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.3) {
+            if (Step == 3 || Step == 6 || Step == 9) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.4) {
+            if (Step == 2 || Step == 4 || Step == 6 || Step == 8) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.5) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 7 || Step == 9) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.6) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.7) {
+            if (Step == 1 || Step == 3 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.8) {
+            if (Step == 1 || Step == 3 || Step == 4 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else if (Math.abs(power) < 0.9) {
+            if (Step == 1 || Step == 2 || Step == 3 || Step == 4 || Step == 5 || Step == 6 || Step == 7 || Step == 9 || Step == 0) {
+                return (Math.signum(power));
+            }
+        }
+        else {
+            return (Math.signum(power));
+        }
+
+        return 0;
+    }
+
     @Override
     public void loop() {
 
+//      Gamepad1 sticks registered to variables
+        float leftY = -gamepad1.left_stick_y;
+        float rightY = gamepad1.right_stick_y;
 
-/*
-* Code for Controller 1
-*
-*/
-
-        float throttle = -gamepad1.left_stick_y;
-        float direction = gamepad1.left_stick_x;
-        float right = throttle - direction;
-        float left = throttle + direction;
-
-        // clip the right/left values so that the values never exceed +/- 1
-        right = Range.clip(right, -1, 1);
-        left = Range.clip(left, -1, 1);
-
-        // scale the joystick value to make it easier to control
-        // the robot more precisely at slower speeds.
-        right = (float)scaleInput(right);
-        left =  (float)scaleInput(left);
-
-        // write the values to the motors
-        motorRight1.setPower(right);
-        motorRight2.setPower(right);
-        motorLeft1.setPower(left);
-        motorLeft2.setPower(left);
+//      Gamepad2 sticks registered to variables
+        float rightY2 = gamepad2.right_stick_y;
+        float leftY2 = -gamepad2.left_stick_y;
+        float leftX2 = -gamepad2.left_stick_x;
 
 
-
-/*
-* Code for Controller 2
-*
-*/
-
-//      ShoulderTilt Variable is set to Left Stick's Y Axis
-        float ShoulderTilt = gamepad2.left_stick_y;
-
-        shoulderPosition += ShoulderTilt;
-//      ShoulderRotation Variable is set to Left Stick's X Axis
-        float ShoulderRotation = gamepad2.left_stick_x;
-
-//      ElbowTilt Variable is set to Right Stick's Y Axis & ClawTilt Variable is set to Right Stick's X Axis
-        float ElbowTilt = gamepad2.right_stick_y;
-        float ClawTilt = gamepad2.right_stick_x;
-
-        // update the position of the claw
-        if (gamepad2.left_bumper) {
-            clawPosition += clawDelta;
-        }
-
-        if (gamepad2.right_bumper) {
-          clawPosition -= clawDelta;
-        }
-
-        //clip the position values so that they never exceed their allowed range.
-        shoulderPosition = Range.clip(shoulderPosition, SHOULDER_MIN_RANGE, SHOULDER_MAX_RANGE);
+//      Clip the position values so that they never exceed their allowed range.
         elbowPosition = Range.clip(elbowPosition, ELBOW_MIN_RANGE, ELBOW_MAX_RANGE);
         clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
+        wristPosition = Range.clip(wristPosition, WRIST_MIN_RANGE, WRIST_MAX_RANGE);
 
-        // write position values to the elbow, shoulder and claw servo
-        shoulder.setPosition(ShoulderTilt);
-        claw.setPosition(clawPosition);
+//      Write position values to the elbow, shoulder and claw servo
+        if(gamepad2.right_bumper = true) {
+            claw.setPosition(1);
+        }
+
+        else {
+            claw.setPosition(0);
+        }
+
+//        Wrist Position
+        if(gamepad2.right_stick_y >= 0) {
+
+        }
+        else {
+
+        }
+
+//      Elbow position
+
+        if(gamepad2.right_stick_x >= 0) {
+
+        }
+        else {
+
+        }
+        wrist.setPosition(wristPosition);
+        elbow.setPosition(elbowPosition);
 
 
-/*
-* Code to send back the robot’s positioning to the driver station
-*
-*/
+//      DcMotor Code to set power
+        leftMotorFront.setPower(DcMotorPower(leftY));
+        leftMotorRear.setPower(DcMotorPower(leftY));
+        rightMotorFront.setPower(DcMotorPower(rightY));
+        rightMotorRear.setPower(DcMotorPower(rightY));
+        ShoulderX.setPower(DcMotorPower(leftX2));
 
-        telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("shoulder", "shoulder:  " + String.format("%.2f", shoulderPosition));
+//      Sends robot data back to driver station
+        telemetry.addData("Text", "** Robot Data**");
         telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
-        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+        telemetry.addData("wrist", "wrist:  " + String.format("%.2f", wristPosition));
+        telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));
+        telemetry.addData("rightY tgt pwr", "rightY  pwr: " + String.format("%.2f", rightY));
+        telemetry.addData("leftY2 tgt pwr", "leftY2 pwr: " + String.format("%.2f", leftY2));
+        telemetry.addData("rightY2 tgt pwr", "rightY2 pwr: " + String.format("%.2f", rightY2));
+        telemetry.addData("Count: ", count++);
 
-
+        Counter++;
     }
-
-    /*
-    * Code to run when the op mode is first disabled goes here
-    *
-    * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-    */
-    @Override
-    public void stop() {
-
-    }
-
-/*
-	 * This method scales the joystick input so for low joystick values, the 
-	 * scaled value is less than linear.  This is to make it easier to drive
-	 * the robot more precisely at slower speeds.
-	 */
-
-    double scaleInput(double dVal)  {
-        double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-                0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
-
-        // get the corresponding index for the scaleInput array.
-        int index = (int) (dVal * 16.0);
-
-        // index should be positive.
-        if (index < 0) {
-            index = -index;
-        }
-
-        // index cannot exceed size of array minus 1.
-        if (index > 16) {
-            index = 16;
-        }
-
-        // get value from the array.
-        double dScale = 0.0;
-        if (dVal < 0) {
-            dScale = -scaleArray[index];
-        } else {
-            dScale = scaleArray[index];
-        }
-
-        // return scaled value.
-        return dScale;
-    }
-
 }
