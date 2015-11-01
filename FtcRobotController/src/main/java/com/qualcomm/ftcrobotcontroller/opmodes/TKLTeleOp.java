@@ -43,8 +43,7 @@ public class TKLTeleOp extends OpMode {
     Servo wrist;
     Servo elbow;
     Servo claw;
-    Servo catcherR;
-    Servo catcherL;
+    Servo cowCatcher;
     int count=1;
     int Counter=0;
 
@@ -64,8 +63,7 @@ public class TKLTeleOp extends OpMode {
         elbow = hardwareMap.servo.get("elbow");
         claw = hardwareMap.servo.get("claw");
         wrist = hardwareMap.servo.get("wrist");
-        catcherR = hardwareMap.servo.get("catcherR");
-        catcherL = hardwareMap.servo.get("catcherL");
+        cowCatcher = hardwareMap.servo.get("cowCatcher");
 
 //      Starting position for servos
         elbowPosition = 0.2;

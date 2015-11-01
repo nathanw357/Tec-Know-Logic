@@ -2,16 +2,16 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by nicole on 10/15/2015.
  */
 public class CowcatcherTest extends OpMode {
 
-    //Dcmotors at the base of the cowcatcher on the robot
+    //Serov at the base of the cowcatcher
     //Control up and down motion
-    DcMotor baseRight;
-    DcMotor baseLeft;
+    Servo cowCatcher;
 
 
     public CowcatcherTest() {
@@ -20,10 +20,8 @@ public class CowcatcherTest extends OpMode {
 
     public void init(){
 
-        baseRight = hardwareMap.dcMotor.get("motor_6");
-        baseLeft = hardwareMap.dcMotor.get("motor_7");
+        cowCatcher = hardwareMap.servo.get("cowCatcher");
 
-        baseLeft.setDirection(DcMotor.Direction.REVERSE);
 
     }
 
@@ -35,22 +33,21 @@ public class CowcatcherTest extends OpMode {
         float cowDown = gamepad1.right_trigger;
 
         //Controls the direction of the cowcatcher and speed
-        float speed = 0;
+        double speed = 0;
 
         //Senses which button is pressed and sets direction/speed
         //If none pressed it stops motion
         if(gamepad1.right_bumper){
-            speed = 1;
+            speed = 0.1;
         }
         else if(gamepad1.right_trigger >= 0.9){
-            speed = -1;
+            speed = -0.1;
         }
         else{
             speed = 0;
         }
 
-        baseRight.setPower(speed);
-        baseLeft.setPower(speed);
+        cowCatcher.setPosition(speed);
 
 
 
