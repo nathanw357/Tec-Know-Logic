@@ -32,7 +32,7 @@ public class TKLTeleOp extends OpMode {
 //  Amount to change the Wrist Servo by
     double wristDelta = 0.1;
 
-
+// Setting the Dc motors
     DcMotor leftMotorFront;
     DcMotor leftMotorRear;
     DcMotor rightMotorFront;
@@ -40,6 +40,7 @@ public class TKLTeleOp extends OpMode {
     DcMotor ShoulderX;
     DcMotor ShoulderY;
 
+    //Setting the Serro motors
     Servo wrist;
     Servo elbow;
     Servo claw;

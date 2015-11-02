@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 public class CowcatcherTest extends OpMode {
 
-    //Serov at the base of the cowcatcher
+    //Servo at the base of the cowcatcher
     //Control up and down motion
     Servo cowCatcher;
 
@@ -48,7 +48,7 @@ public class CowcatcherTest extends OpMode {
         }
 
         cowCatcher.setPosition(speed);
-
+        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", speed));
 
 
 
