@@ -13,6 +13,8 @@ public class CowcatcherTest extends OpMode {
     //Control up and down motion
     Servo cowCatcher;
 
+    double speed = 0.5;
+
 
     public CowcatcherTest() {
 
@@ -21,6 +23,7 @@ public class CowcatcherTest extends OpMode {
     public void init(){
 
         cowCatcher = hardwareMap.servo.get("cowCatcher");
+
 
 
     }
@@ -33,22 +36,25 @@ public class CowcatcherTest extends OpMode {
         float cowDown = gamepad1.right_trigger;
 
         //Controls the direction of the cowcatcher and speed
-        double speed = 0;
+
 
         //Senses which button is pressed and sets direction/speed
         //If none pressed it stops motion
         if(gamepad1.right_bumper){
-            speed = 0.1;
+            if(speed != 0.9) {
+                speed += 0.1;
+            }
         }
         else if(gamepad1.right_trigger >= 0.9){
-            speed = -0.1;
+                speed = 0.2;
+
         }
         else{
-            speed = 0;
+
+            //speed = 0.5;
         }
 
         cowCatcher.setPosition(speed);
-        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", speed));
 
 
 

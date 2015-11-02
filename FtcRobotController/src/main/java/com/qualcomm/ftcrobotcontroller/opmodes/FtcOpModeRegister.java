@@ -61,7 +61,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("CowcatcherTest", CowcatcherTest.class);
     manager.register("ExampleTeleopTankMode", ExampleTeleopTankMode.class);
     manager.register("TKLTeleOp", TKLTeleOp.class);
-    manager.register ("PushBotAuto", PushBotAuto.class);
+    manager.register ("SlowTankMode", SlowTankMode.class);
     manager.register ("PushBotManual", PushBotManual.class);
 
     /*
