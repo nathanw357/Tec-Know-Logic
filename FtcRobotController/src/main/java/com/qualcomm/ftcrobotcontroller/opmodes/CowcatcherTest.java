@@ -1,8 +1,9 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by nicole on 10/15/2015.
@@ -13,7 +14,7 @@ public class CowcatcherTest extends OpMode {
     //Control up and down motion
     Servo cowCatcher;
 
-    double speed = 0.5;
+    double speed = 0.2;
 
 
     public CowcatcherTest() {
@@ -41,17 +42,10 @@ public class CowcatcherTest extends OpMode {
         //Senses which button is pressed and sets direction/speed
         //If none pressed it stops motion
         if(gamepad1.right_bumper){
-            if(speed != 0.9) {
-                speed += 0.1;
-            }
+            speed = 0.2;
         }
         else if(gamepad1.right_trigger >= 0.9){
-                speed = 0.2;
-
-        }
-        else{
-
-            //speed = 0.5;
+            speed = 0.9;
         }
 
         cowCatcher.setPosition(speed);
