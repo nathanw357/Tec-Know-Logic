@@ -14,7 +14,7 @@ public class CowcatcherTest extends OpMode {
     //Control up and down motion
     Servo cowCatcher;
 
-    double speed = 0.2;
+    double cowPosition = 0.2;
 
 
     public CowcatcherTest() {
@@ -41,14 +41,16 @@ public class CowcatcherTest extends OpMode {
 
         //Senses which button is pressed and sets direction/speed
         //If none pressed it stops motion
-        if(gamepad1.right_bumper){
-            speed = 0.2;
+        if(cowUp == true){
+            cowPosition = 0.2;
+
+
         }
-        else if(gamepad1.right_trigger >= 0.9){
-            speed = 0.9;
+        else if(cowDown >= 0.9){
+            cowPosition = 0.9;
         }
 
-        cowCatcher.setPosition(speed);
+        cowCatcher.setPosition(cowPosition);
 
 
 
