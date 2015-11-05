@@ -3,7 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-//import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -17,6 +17,11 @@ public class SlowTankMode extends OpMode {
     DcMotor rightMotorFront;
     DcMotor rightMotorRear;
 
+    Servo cowCatcher;
+
+    double cowPosition = 0.9;
+    float position = 1;
+
 
     @Override
     public void init() {
@@ -25,7 +30,10 @@ public class SlowTankMode extends OpMode {
         leftMotorRear = hardwareMap.dcMotor.get("leftMotorRear");
         rightMotorFront = hardwareMap.dcMotor.get("rightMotorFront");
         rightMotorRear = hardwareMap.dcMotor.get("rightMotorRear");
-    //    rightMotorFront.setDirection(DcMotor.Direction.REVERSE);
+
+        cowCatcher = hardwareMap.servo.get("cowCatcher");
+
+        //    rightMotorFront.setDirection(DcMotor.Direction.REVERSE);
     //    rightMotorRear.setDirection(DcMotor.Direction.REVERSE);
 
 
@@ -35,6 +43,10 @@ public class SlowTankMode extends OpMode {
 
     @Override
     public void loop() {
+
+        boolean cowUp = gamepad1.right_bumper;
+        boolean cowMid = gamepad1.left_bumper;
+        float cowDown = gamepad1.right_trigger;
 
 
         double leftY = -gamepad1.left_stick_y;
@@ -47,6 +59,38 @@ public class SlowTankMode extends OpMode {
         leftMotorRear.setPower(leftY);
         rightMotorFront.setPower(rightY);
         rightMotorRear.setPower(rightY);
+
+        if (cowUp == true) {
+
+            if (position == 2) {
+                cowPosition = 0.2;
+                position = 1;
+            }
+            if (position == 3) {
+                cowPosition = 0.5;
+                position = 2;
+            }
+        }
+
+        if (cowDown >= 0.9) {
+            if (position == 1) {
+                cowPosition = 0.5;
+                position = 2;
+            }
+            if (position == 2) {
+                cowPosition = 0.9;
+                position = 3;
+            }
+
+        }
+
+        cowCatcher.setPosition(cowPosition);
+
+        try {
+            Thread.sleep(100);                 //100 milliseconds is 0.1 second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
 
         telemetry.addData("Text", "** Robot Data**");
