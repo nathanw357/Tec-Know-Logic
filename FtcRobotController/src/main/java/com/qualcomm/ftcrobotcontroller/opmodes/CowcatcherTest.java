@@ -30,61 +30,26 @@ public class CowcatcherTest extends OpMode {
 
     public void loop() {
 
-        //right bumper activates upward movement
-        //The right trigger activates downward movement
+        //right bumper goes to position 1
         boolean cowUp = gamepad1.right_bumper;
+        //left bumper goes to position 2
         boolean cowMid = gamepad1.left_bumper;
+        //right trigger goes to position 3
         float cowDown = gamepad1.right_trigger;
 
-        //Controls the direction of the cowcatcher and speed
 
 
-        //Senses which button is pressed and sets direction/speed
-        //If none pressed it stops motion
+        //Senses which button is pressed and sets position
 
-       /* if(cowUp == true) {
+        if(cowUp == true) {
             cowPosition = 0.2;
         }
         else if (cowMid == true){
             cowPosition = 0.5;
         }
-
-
-        if(cowDown >= 0.9){
-            cowPosition = 0.8;
-        }*/
-
-        if (cowUp == true) {
-
-            if (position == 2) {
-                cowPosition = 0.2;
-                position = 1;
-            }
-            if (position == 3) {
-                cowPosition = 0.5;
-                position = 2;
-            }
+        else if(cowDown >= 0.9){
+            cowPosition = 0.9;
         }
-
-        if (cowDown >= 0.9) {
-            if (position == 1) {
-                cowPosition = 0.5;
-                position = 2;
-            }
-            if (position == 2) {
-                cowPosition = 0.9;
-                position = 3;
-            }
-
-        }
-
-        cowCatcher.setPosition(cowPosition);
-
-        /*try {
-            Thread.sleep(100);                 //100 milliseconds is 0.1 second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }*/
 
         telemetry.addData("Text", "** Robot Data**");
         telemetry.addData("position", "position:  " + String.format("%.2f", position));
