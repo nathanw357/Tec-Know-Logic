@@ -12,12 +12,13 @@ public class CowcatcherTest2 extends OpMode {
     //Control up and down motion
     Servo cowCatcher;
 
-    //The position of the servo. 0.2 is up, 0.5 is middle, and 0.9 is down.
+    //The position of the servo.
+    // 0.2 is up, 0.5 is middle, and 0.9 is down.
     double cowPosition = 0.2;
 
     //A simplified position method.
     //1 is up, 2 is middle, and 3 is down
-    float position = 1;
+    int position = 1;
 
     //checks the states of the button and trigger
     int buttonState = 0;
@@ -41,19 +42,15 @@ public class CowcatcherTest2 extends OpMode {
         if(cowUpButton){
             buttonState = 1;
         }
-        if(!cowUpButton){
+        else {
             if(buttonState == 1) {
                 if (position == 3) {
                     cowPosition = 0.5;
                     position = 2;
                 }
-                else if (position == 2) {
+                else {
                     cowPosition = 0.2;
                     position = 1;
-                }
-                else{
-                    cowPosition = 0.9;
-                    position = 3;
                 }
 
                 buttonState = 0;
@@ -64,20 +61,18 @@ public class CowcatcherTest2 extends OpMode {
         if(cowDownButton >= 0.9){
             triggerState = 1;
         }
-        if(cowDownButton < 0.9){
+        else{
             if(triggerState == 1){
                 if(position == 1){
                     cowPosition = 0.5;
                     position = 2;
                 }
-                else if(position == 2){
+                else{
                     cowPosition = 0.9;
                     position = 3;
                 }
-                else{
-                    cowPosition = 0.2;
-                    position = 1;
-                }
+
+                triggerState = 0;
             }
         }
 
