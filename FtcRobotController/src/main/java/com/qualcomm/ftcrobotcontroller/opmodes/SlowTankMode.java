@@ -19,8 +19,11 @@ public class SlowTankMode extends OpMode {
 
     Servo cowCatcher;
 
-    double cowPosition = 0.9;
+    double cowPosition = 0;
     float position = 1;
+
+    int buttonState = 0;
+    int triggerState = 0;
 
 
     @Override
@@ -44,9 +47,8 @@ public class SlowTankMode extends OpMode {
     @Override
     public void loop() {
 
-        boolean cowUp = gamepad1.right_bumper;
-        boolean cowMid = gamepad1.left_bumper;
-        float cowDown = gamepad1.right_trigger;
+        boolean cowUpButton = gamepad1.right_bumper;
+        float cowDownButton = gamepad1.right_trigger;
 
 
         double leftY = -gamepad1.left_stick_y;
@@ -60,38 +62,49 @@ public class SlowTankMode extends OpMode {
         rightMotorFront.setPower(rightY);
         rightMotorRear.setPower(rightY);
 
-        if (cowUp == true) {
+        if(cowUpButton){
+            buttonState = 1;
+        }
+        else {
+            if(buttonState == 1) {
+                if (position == 3) {
+                    cowPosition = 0.5;
+                    position = 2;
+                }
+                else {
+                    cowPosition = 0.2;
+                    position = 1;
+                }
 
-            if (position == 2) {
-                cowPosition = 0.2;
-                position = 1;
-            }
-            if (position == 3) {
-                cowPosition = 0.5;
-                position = 2;
+                buttonState = 0;
             }
         }
 
-        if (cowDown >= 0.9) {
-            if (position == 1) {
-                cowPosition = 0.5;
-                position = 2;
-            }
-            if (position == 2) {
-                cowPosition = 0.9;
-                position = 3;
-            }
 
+        if(cowDownButton >= 0.9){
+            triggerState = 1;
+        }
+        else{
+            if(triggerState == 1){
+                if(position == 1){
+                    cowPosition = 0.5;
+                    position = 2;
+                }
+                else{
+                    cowPosition = 0.9;
+                    position = 3;
+                }
+
+                triggerState = 0;
+            }
+        }
+
+        if(triggerState == 1 && buttonState == 1){
+            triggerState = 0;
+            buttonState = 0;
         }
 
         cowCatcher.setPosition(cowPosition);
-
-        try {
-            Thread.sleep(100);                 //100 milliseconds is 0.1 second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-
 
         telemetry.addData("Text", "** Robot Data**");
         telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));

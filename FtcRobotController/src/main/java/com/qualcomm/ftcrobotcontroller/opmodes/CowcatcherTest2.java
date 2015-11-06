@@ -85,8 +85,6 @@ public class CowcatcherTest2 extends OpMode {
 
         cowCatcher.setPosition(cowPosition);
 
-        telemetry.addData("Text", "** Robot Data**");
-        telemetry.addData("position", "position:  " + String.format("%.2f", position));
 
 
 
