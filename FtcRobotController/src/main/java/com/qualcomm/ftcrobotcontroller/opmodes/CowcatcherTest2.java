@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by nicole on 10/15/2015.
  */
-public class  CowcatcherTest2 extends OpMode {
+public class CowcatcherTest2 extends OpMode {
 
     //Servo at the base of the cowcatcher
     //Control up and down motion
@@ -14,7 +14,7 @@ public class  CowcatcherTest2 extends OpMode {
 
     //The position of the servo.
     // 0.2 is up, 0.5 is middle, and 0.9 is down.
-    double cowPosition = 0.7;
+    double cowPosition = 0.2;
 
     //A simplified position method.
     //1 is up, 2 is middle, and 3 is down
@@ -45,11 +45,11 @@ public class  CowcatcherTest2 extends OpMode {
         else {
             if(buttonState == 1) {
                 if (position == 3) {
-                    cowPosition = 0.3;
+                    cowPosition = 0.5;
                     position = 2;
                 }
                 else {
-                    cowPosition = 0.7;
+                    cowPosition = 0.2;
                     position = 1;
                 }
 
@@ -58,17 +58,17 @@ public class  CowcatcherTest2 extends OpMode {
         }
 
 
-        if(cowDownButton >= 0.7){
+        if(cowDownButton >= 0.9){
             triggerState = 1;
         }
         else{
             if(triggerState == 1){
                 if(position == 1){
-                    cowPosition = 0.3;
+                    cowPosition = 0.5;
                     position = 2;
                 }
                 else{
-                    cowPosition = 0;
+                    cowPosition = 0.9;
                     position = 3;
                 }
 
@@ -84,8 +84,6 @@ public class  CowcatcherTest2 extends OpMode {
 
 
         cowCatcher.setPosition(cowPosition);
-
-        telemetry.addData("cowcatcher", "position:  " + String.format("%.2f", cowPosition));
 
 
 

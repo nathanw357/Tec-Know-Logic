@@ -56,7 +56,7 @@ public class FtcOpModeRegister implements OpModeRegister {
      */
 
     manager.register("NullOp", NullOp.class);
-
+    manager.register("ChrisSquareTest", ChrisSquareTest.class);
     manager.register("CowcatcherTest2", CowcatcherTest2.class);
     manager.register("CowcatcherTest", CowcatcherTest.class);
     manager.register("ExampleTeleopTankMode", ExampleTeleopTankMode.class);
