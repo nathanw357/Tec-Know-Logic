@@ -11,7 +11,7 @@ public class AschersFails {
     DcMotor leftMotor;
 
 
-public void () {
+public void runOpMode() throws InterruptedException {
     leftMotor = hardwareMap.dcMotor.get("leftMotorFront");
     rightMotor = hardwareMap.dcMotor.get("rightMotorFront");
     rightMotor.setDirection(Direction.REVERSE);
