@@ -12,11 +12,11 @@ public class ChrisSquareTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        leftMotor = hardwareMap.dcMotor.get("left_drive");
-        rightMotor = hardwareMap.dcMotor.get("right_drive");
+        leftMotor = hardwareMap.dcMotor.get("leftMotorFront");
+        rightMotor = hardwareMap.dcMotor.get("rightMotorFront");
         rightMotor.setDirection(DcMotor.Direction.REVERSE);
-        leftMotor2 = hardwareMap.dcMotor.get("left_drive2");
-        rightMotor2 = hardwareMap.dcMotor.get("right_drive2");
+        leftMotor2 = hardwareMap.dcMotor.get("leftMotorRear");
+        rightMotor2 = hardwareMap.dcMotor.get("rightMotorRear");
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
 
 
