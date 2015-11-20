@@ -191,6 +191,7 @@ public class TKLTeleOp extends OpMode {
 
 //      Sends robot data back to driver station
         telemetry.addData("Text", "** Robot Data**");
+        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbowPosition));
         telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("wrist", "wrist:  " + String.format("%.2f", wristPosition));
         telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));
