@@ -1,14 +1,16 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.*;
 
-/**
- * Created by Ascher on 11/19/2015.
- */
-public class AschersFails {
+
+public class AschersFails extends LinearOpMode {
     DcMotor leftMotor;
+    DcMotor leftMotor2;
+    DcMotor rightMotor;
+    DcMotor rightMotor2;
 
 
 public void runOpMode() throws InterruptedException {
@@ -20,3 +22,5 @@ public void runOpMode() throws InterruptedException {
     rightMotor2.setDirection(Direction.REVERSE);
  }
 }
+
+
