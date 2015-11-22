@@ -3,7 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class ChrisSquareTest extends LinearOpMode {
+public class ChrisCircleTest extends LinearOpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
     DcMotor leftMotor2;
@@ -22,17 +22,23 @@ public class ChrisSquareTest extends LinearOpMode {
         waitForStart();
 
         for(int i=0; i<4; i++) {
-            leftMotor.setPower(1.0);
-            leftMotor2.setPower(1.0);
-            rightMotor.setPower(1.0);
-            rightMotor2.setPower(1.0);
-            sleep(1000);
+            leftMotor.setPower(0.75);
+            leftMotor2.setPower(0.75);
+            rightMotor.setPower(0.25);
+            rightMotor2.setPower(0.25);
+            sleep(5000);
 
-            leftMotor.setPower(0.5);
-            leftMotor2.setPower(0.5);
-            rightMotor.setPower(-0.5);
-            rightMotor2.setPower(-0.5);
-            sleep(1000);
+            leftMotor.setPowerFloat();
+            leftMotor2.setPowerFloat();
+            rightMotor.setPowerFloat();
+            rightMotor2.setPowerFloat();
+            sleep(2000);
+
+            leftMotor.setPower(0.25);
+            leftMotor2.setPower(0.25);
+            rightMotor.setPower(0.75);
+            rightMotor2.setPower(0.75);
+            sleep(5000);
         }
 
         leftMotor.setPowerFloat();
