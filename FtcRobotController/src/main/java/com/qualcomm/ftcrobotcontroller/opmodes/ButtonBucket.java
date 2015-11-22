@@ -42,8 +42,9 @@ public class ButtonBucket extends OpMode {
         }
         else {
             if(buttonState == 1) {
-
-                bucketPosition += 0.1;
+                if(bucketPosition <= 0.6){
+                    bucketPosition += 0.1;
+                }
 
                 buttonState = 0;
             }
@@ -55,8 +56,9 @@ public class ButtonBucket extends OpMode {
         }
         else{
             if(triggerState == 1){
-
-                bucketPosition -= 0.1;
+                if(bucketPosition >= 0.2){
+                    bucketPosition -= 0.1;
+                }
 
                 triggerState = 0;
             }
@@ -71,7 +73,7 @@ public class ButtonBucket extends OpMode {
 
         bucket.setPosition(bucketPosition);
 
-        telemetry.addData("cowcatcher", "position:  " + String.format("%.2f", bucketPosition));
+        telemetry.addData("bucket", "position:  " + String.format("%.2f", bucketPosition));
 
 
 

@@ -55,14 +55,11 @@ public class FtcOpModeRegister implements OpModeRegister {
      * If two or more op modes are registered with the same name, the app will display an error.
      */
 
-    manager.register("NullOp", NullOp.class);
-    manager.register("ChrisSquareTest", ChrisSquareTest.class);
     manager.register("CowcatcherTest2", CowcatcherTest2.class);
     manager.register("CowcatcherTest", CowcatcherTest.class);
-    manager.register("ExampleTeleopTankMode", ExampleTeleopTankMode.class);
     manager.register("TKLTeleOp", TKLTeleOp.class);
     manager.register ("SlowTankMode", SlowTankMode.class);
-    manager.register ("PushBotManual", PushBotManual.class);
+    manager.register("ButtonBucket", ButtonBucket.class);
 
 
 
