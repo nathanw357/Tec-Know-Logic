@@ -11,21 +11,24 @@ public class ButtonBucket extends OpMode {
 
     //Servo at the base of the cowcatcher
     //Control up and down motion
-    Servo bucket;
+    Servo bucketLeft;
+    Servo bucketRight;
 
     //The position of the servo.
     // 0.2 is up, 0.5 is middle, and 0.9 is down.
-    double bucketPosition = 0.7;
+    double bucketLeftPosition = 0.3;
+    double bucketRightPosition = 0.7;
 
 
     //checks the states of the button and trigger
-    int buttonState = 0;
-    int triggerState = 0;
+    int rightButtonState = 0;
+    int rightTriggerState = 0;
 
 
     public void init(){
 
-        bucket = hardwareMap.servo.get("bucket");
+        bucketLeft = hardwareMap.servo.get("bucketLeft");
+        bucketRight = hardwareMap.servo.get("bucketRight");
 
     }
 
@@ -38,42 +41,46 @@ public class ButtonBucket extends OpMode {
 
 
         if(bucketUpButton){
-            buttonState = 1;
+            rightButtonState = 1;
         }
         else {
-            if(buttonState == 1) {
-                if(bucketPosition <= 0.6){
-                    bucketPosition += 0.1;
+            if(rightButtonState == 1) {
+                if(bucketLeftPosition >= 0.2){
+                    bucketLeftPosition -= 0.1;
+                    bucketRightPosition += 0.1;
                 }
 
-                buttonState = 0;
+                rightButtonState = 0;
             }
         }
 
 
-        if(bucketDownButton >= 0.5){
-            triggerState = 1;
+        if(bucketDownButton >= 0.8){
+            rightTriggerState = 1;
         }
         else{
-            if(triggerState == 1){
-                if(bucketPosition >= 0.2){
-                    bucketPosition -= 0.1;
+            if(rightTriggerState == 1){
+                if(bucketLeftPosition <= 0.9){
+                    bucketLeftPosition += 0.1;
+                    bucketRightPosition -= 0.1;
                 }
 
-                triggerState = 0;
+                rightTriggerState = 0;
             }
         }
 
-        if(triggerState == 1 && buttonState == 1){
-            triggerState = 0;
-            buttonState = 0;
+        if(rightTriggerState == 1 && rightButtonState == 1){
+            rightTriggerState = 0;
+            rightButtonState = 0;
         }
 
 
 
-        bucket.setPosition(bucketPosition);
+        bucketLeft.setPosition(bucketLeftPosition);
+        bucketRight.setPosition(bucketRightPosition);
 
-        telemetry.addData("bucket", "position:  " + String.format("%.2f", bucketPosition));
+        telemetry.addData("left", "position:  " + String.format("%.2f", bucketLeftPosition));
+        telemetry.addData("right", "position:" + String.format("%.2f", bucketRightPosition));
 
 
 

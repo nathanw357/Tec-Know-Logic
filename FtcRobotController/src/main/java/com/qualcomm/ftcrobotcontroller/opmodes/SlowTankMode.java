@@ -29,6 +29,7 @@ public class SlowTankMode extends OpMode {
 
         //rightMotorRear.setDirection(DcMotor.Direction.REVERSE);
         leftMotorRear.setDirection(DcMotor.Direction.REVERSE);
+        rightMotorFront.setDirection(DcMotor.Direction.REVERSE);
 
 
     }

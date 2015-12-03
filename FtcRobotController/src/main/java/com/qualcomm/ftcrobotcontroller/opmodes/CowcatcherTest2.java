@@ -9,20 +9,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class CowcatcherTest2 extends OpMode {
 
     //Servo at the base of the cowcatcher
-    //Control up and down motion
     Servo cowCatcher;
 
     //The position of the servo.
-    // 0.2 is up, 0.5 is middle, and 0.9 is down.
+    // 0.2 is down, 0.5 is middle, and 0.9 is up.
     double cowPosition = 0.2;
 
     //A simplified position method.
-    //1 is up, 2 is middle, and 3 is down
+    //1 is down, 2 is middle, and 3 is up
     int position = 1;
 
     //checks the states of the button and trigger
-    int buttonState = 0;
-    int triggerState = 0;
+    int leftButtonState = 0;
+    int leftTriggerState = 0;
 
 
     public void init(){
@@ -40,45 +39,45 @@ public class CowcatcherTest2 extends OpMode {
 
 
         if(cowUpButton){
-            buttonState = 1;
+            leftButtonState = 1;
         }
         else {
-            if(buttonState == 1) {
-                if (position == 3) {
-                    cowPosition = 0.5;
+            if(leftButtonState == 1) {
+                if (position == 1) {
+                    cowPosition = 0.6;
                     position = 2;
                 }
                 else {
-                    cowPosition = 0.2;
-                    position = 1;
+                    cowPosition = 0.9;
+                    position = 3;
                 }
 
-                buttonState = 0;
+                leftButtonState = 0;
             }
         }
 
 
         if(cowDownButton >= 0.9){
-            triggerState = 1;
+            leftTriggerState = 1;
         }
         else{
-            if(triggerState == 1){
-                if(position == 1){
-                    cowPosition = 0.5;
+            if(leftTriggerState == 1){
+                if(position == 3){
+                    cowPosition = 0.6;
                     position = 2;
                 }
                 else{
-                    cowPosition = 0.9;
-                    position = 3;
+                    cowPosition = 0.2;
+                    position = 1;
                 }
 
-                triggerState = 0;
+                leftTriggerState = 0;
             }
         }
 
-        if(triggerState == 1 && buttonState == 1){
-            triggerState = 0;
-            buttonState = 0;
+        if(leftTriggerState == 1 && leftButtonState == 1){
+            leftTriggerState = 0;
+            leftButtonState = 0;
         }
 
 
