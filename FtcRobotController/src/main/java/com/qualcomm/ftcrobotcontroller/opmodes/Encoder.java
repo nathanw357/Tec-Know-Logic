@@ -33,10 +33,10 @@ public class Encoder extends OpMode {
         rightMotor.setDirection(DcMotor.Direction.REVERSE);
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
 
-        leftMotor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        leftMotor2.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        rightMotor.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        rightMotor2.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
+        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        leftMotor2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        rightMotor2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
     }
 
     @Override
@@ -46,10 +46,10 @@ public class Encoder extends OpMode {
         leftMotor2.setTargetPosition((int) COUNTS);
         rightMotor2.setTargetPosition((int) COUNTS);
 
-        leftMotor.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        leftMotor2.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        rightMotor.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        rightMotor2.setChannelMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        leftMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        leftMotor2.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        rightMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        rightMotor2.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
 
         leftMotor.setPower(0.5);
         rightMotor.setPower(0.5);
