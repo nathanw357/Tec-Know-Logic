@@ -17,7 +17,7 @@ public class Encoder extends OpMode {
     final static int ENCODER_CFR = 1440;
     final static double GEAR_RATIO = 1;
     final static int WHEEL_DIAMETER = 4;
-    final static int DISTANCE = 12;
+    final static int DISTANCE = 36;
 
     final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
     final static double ROTATIONS = DISTANCE / CIRCUMFERENCE;
@@ -42,9 +42,9 @@ public class Encoder extends OpMode {
 
     @Override
     public void start() {
-        leftMotor.setTargetPosition((int) COUNTS);
+        leftMotor.setTargetPosition((int) -COUNTS);
         rightMotor.setTargetPosition((int) COUNTS);
-        leftMotor2.setTargetPosition((int) COUNTS);
+        leftMotor2.setTargetPosition((int) -COUNTS);
         rightMotor2.setTargetPosition((int) COUNTS);
 
         leftMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
