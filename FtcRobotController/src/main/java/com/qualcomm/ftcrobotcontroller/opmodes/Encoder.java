@@ -4,9 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
-/**
- * Created by chris on 12/6/2015.
- */
 public class Encoder extends OpMode {
 
     DcMotor leftMotor;
