@@ -12,9 +12,6 @@ public class Main extends OpMode {
     //  Position of the arm servo
     double wristPosition;
 
-    //  Amount to change the arm servo position by
-    double wristDelta = 0.1;
-
 //    Servo at the base of the bucket
 
     Servo bucketLeft;
@@ -83,10 +80,10 @@ public class Main extends OpMode {
         rightMotorFront = hardwareMap.dcMotor.get("rightMotorFront");
         rightMotorRear = hardwareMap.dcMotor.get("rightMotorRear");
 
-//      Maps the Elbow & Wrist motors
+//      Maps the Elbow, Claw & Wrist motors
         elbow = hardwareMap.dcMotor.get("elbow");
         wrist = hardwareMap.servo.get("wrist");
-
+        claw = hardwareMap.servo.get("claw");
 //      Maps the Shoulder X & Y
         ShoulderX = hardwareMap.dcMotor.get("ShoulderX");
         ShoulderY = hardwareMap.dcMotor.get("ShoulderY");
@@ -99,8 +96,8 @@ public class Main extends OpMode {
 
     public void loop() {
 
-        //The left bumper activates upward movement
-        //The left trigger activates downward movement
+//        The left bumper activates upward movement
+//        The left trigger activates downward movement
         boolean bucketUpButton = gamepad1.left_bumper;
         float bucketDownButton = gamepad1.left_trigger;
 
@@ -135,24 +132,19 @@ public class Main extends OpMode {
 
 //      Write position values to the wrist & claw servo
 //      Claw open and close
-        if(gamepad2.right_bumper = true) {
-            claw.setPosition(1);
-        }
-
-        else {
-            claw.setPosition(0);
-        }
+//        if(gamepad2.right_bumper = true) {
+//            claw.setPosition(0);
+//        }
+//
+//        else {
+//            claw.setPosition(1);
+//        }
 
 //      Wrist Position
-        if(rightY2 > 0) {
-
-            wrist.setPosition(rightY2/2 + 0.5);
-        }
-
-        else {
-
-        }
-
+//        if(rightY2 > 0) {
+//            wrist.setPosition(rightY2/2 + 0.5);
+//        }
+//
 //      Set power to the elbow & shoulder's X & Y
 //      Elbow DC power
         elbow.setPower(rightX2);
@@ -258,18 +250,13 @@ public class Main extends OpMode {
         telemetry.addData("Text", "** Robot Data**");
         telemetry.addData("leftbucket", "position:  " + String.format("%.2f", bucketLeftPosition));
         telemetry.addData("rightbucket", "position:" + String.format("%.2f", bucketRightPosition));
-        telemetry.addData("leftMotorFront", "position:  " + String.format("%.2f", leftMotorFront));
-        telemetry.addData("leftMotorRear", "position:" + String.format("%.2f", leftMotorRear));
-        telemetry.addData("rightMotorFront", "position:  " + String.format("%.2f", rightMotorFront));
-        telemetry.addData("rightMotorRear", "position:" + String.format("%.2f", rightMotorRear));
-        telemetry.addData("elbow", "elbow:  " + String.format("%.2f", elbow));
-        telemetry.addData("wrist", "wrist:  " + String.format("%.2f", wristPosition));
-        telemetry.addData("leftY tgt pwr", "leftY  pwr: " + String.format("%.2f", leftY));
-        telemetry.addData("rightY tgt pwr", "rightY  pwr: " + String.format("%.2f", rightY));
-        telemetry.addData("rightX2 tgt pwr", "rightX2 pwr: " + String.format("%.2f", rightX2));
-        telemetry.addData("rightY2 tgt pwr", "rightY2 pwr: " + String.format("%.2f", rightY2));
-        telemetry.addData("leftY2 tgt pwr", "leftY2 pwr: " + String.format("%.2f", leftY2));
-        telemetry.addData("leftX2 tgt pwr", "leftX2 pwr: " + String.format("%.2f", leftX2));
+        telemetry.addData("leftMotors tgt pwr", "leftMotors  pwr: " + String.format("%.2f", leftY));
+        telemetry.addData("rightMotors tgt pwr", "rightMotors  pwr: " + String.format("%.2f", rightY));
+        telemetry.addData("Elbow tgt pwr", "Elbow pwr: " + String.format("%.2f", rightX2));
+        telemetry.addData("Wrist tgt pwr", "Wrist pwr: " + String.format("%.2f", rightY2));
+        telemetry.addData("ShoulderY tgt pwr", "ShoulderY pwr: " + String.format("%.2f", leftY2));
+        telemetry.addData("ShoulderX tgt pwr", "ShoulderX pwr: " + String.format("%.2f", leftX2));
+
 
 
 

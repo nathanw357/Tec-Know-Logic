@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 
+/**
+ * Created by chris on 12/6/2015.
+ */
 public class Encoder extends OpMode {
 
     DcMotor leftMotor;
@@ -27,9 +30,9 @@ public class Encoder extends OpMode {
         rightMotor = hardwareMap.dcMotor.get("rightMotorFront");
         rightMotor2 = hardwareMap.dcMotor.get("rightMotorRear");
 
-//      Setting the motors in reverse
-        leftMotor2.setDirection(DcMotor.Direction.REVERSE);
+        //rightMotor.setDirection(DcMotor.Direction.REVERSE);
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
+        leftMotor2.setDirection(DcMotor.Direction.REVERSE);
 
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         leftMotor2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
