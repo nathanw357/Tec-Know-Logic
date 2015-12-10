@@ -30,7 +30,8 @@ public class Encoder extends OpMode {
         rightMotor = hardwareMap.dcMotor.get("rightMotorFront");
         rightMotor2 = hardwareMap.dcMotor.get("rightMotorRear");
 
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+//      Setting the motors in reverse
+        leftMotor2.setDirection(DcMotor.Direction.REVERSE);
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
 
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
