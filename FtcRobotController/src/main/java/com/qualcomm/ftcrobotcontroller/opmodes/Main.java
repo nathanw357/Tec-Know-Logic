@@ -96,8 +96,8 @@ public class Main extends OpMode {
 
     public void loop() {
 
-        //The left bumper activates upward movement
-        //The left trigger activates downward movement
+//        The left bumper activates upward movement
+//        The left trigger activates downward movement
         boolean bucketUpButton = gamepad1.left_bumper;
         float bucketDownButton = gamepad1.left_trigger;
 
