@@ -16,12 +16,12 @@ public class Encoder extends OpMode {
 
     final static int ENCODER_CFR = 1440;
     final static double GEAR_RATIO = 1;
-    final static int WHEEL_DIAMETER = 4;
-    final static int DISTANCE = 36;
+    final static double WHEEL_DIAMETER = 3.1715;
+    final static int DISTANCE = 1;
 
     final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
     final static double ROTATIONS = DISTANCE / CIRCUMFERENCE;
-    final static double COUNTS = ENCODER_CFR * ROTATIONS *GEAR_RATIO;
+    final static double DriveOneInch = ENCODER_CFR * ROTATIONS *GEAR_RATIO;
 
     @Override
     public void init() {
@@ -42,10 +42,10 @@ public class Encoder extends OpMode {
 
     @Override
     public void start() {
-        leftMotor.setTargetPosition((int) -COUNTS);
-        rightMotor.setTargetPosition((int) COUNTS);
-        leftMotor2.setTargetPosition((int) -COUNTS);
-        rightMotor2.setTargetPosition((int) COUNTS);
+        leftMotor.setTargetPosition((int) -DriveOneInch * 20);
+        rightMotor.setTargetPosition((int) DriveOneInch * 20);
+        leftMotor2.setTargetPosition((int) -DriveOneInch * 20);
+        rightMotor2.setTargetPosition((int) DriveOneInch * 20);
 
         leftMotor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
         leftMotor2.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
@@ -61,7 +61,7 @@ public class Encoder extends OpMode {
 
     @Override
     public void loop() {
-        telemetry.addData("Motor Target", COUNTS);
+        telemetry.addData("Motor Target", DriveOneInch);
         telemetry.addData("LeftPosition", leftMotor.getCurrentPosition());
         telemetry.addData("Right Position", rightMotor.getCurrentPosition());
     }
