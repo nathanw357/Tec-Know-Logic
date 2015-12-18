@@ -82,11 +82,5 @@ public class TKLLinearOp1 extends LinearOpMode {
         rightMotor.setPower(0);
         leftMotor2.setPower(0);
         rightMotor2.setPower(0);
-
-
-
-
-
         }
-
 }
