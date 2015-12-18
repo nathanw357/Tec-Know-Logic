@@ -58,6 +58,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("CowcatcherTest2", CowcatcherTest2.class);
     manager.register("EncoderTest", Encoder.class);
     manager.register("Main", Main.class);
+    manager.register("TKL Linear Op", TKLLinearOp2.class);
     manager.register("TKLTeleOp", TKLTeleOp.class);
     manager.register ("SlowTankMode", SlowTankMode.class);
     manager.register("ButtonBucket", ButtonBucket.class);
