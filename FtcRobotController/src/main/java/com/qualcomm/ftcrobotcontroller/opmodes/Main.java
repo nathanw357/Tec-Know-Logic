@@ -149,13 +149,13 @@ public class Main extends OpMode {
 
 //      Set power to the elbow & shoulder's X & Y
 //      Elbow DC power
-        elbow.setPower(rightY2);
+        elbow.setPower(-rightY2);
 
 //      ShoulderX
         ShoulderX.setPower(leftX2);
 
 //      ShoulderY
-        ShoulderY.setPower(leftY2);
+        ShoulderY.setPower(-leftY2);
 
 //        Reads the right bumper and trigger to move the bucket-
         if(bucketUpButton){
