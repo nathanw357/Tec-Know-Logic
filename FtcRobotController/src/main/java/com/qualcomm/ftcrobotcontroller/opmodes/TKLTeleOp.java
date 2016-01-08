@@ -40,7 +40,7 @@ public class TKLTeleOp extends OpMode {
     DcMotor ShoulderX;
     DcMotor ShoulderY;
 
-    //Setting the Serro motors
+    //Setting the Servo motors
     Servo wrist;
     Servo elbow;
     Servo claw;
