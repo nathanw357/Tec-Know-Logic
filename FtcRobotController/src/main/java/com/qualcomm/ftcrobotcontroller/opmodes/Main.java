@@ -43,16 +43,16 @@ public class Main extends OpMode {
 
 //    The position of the servo.
 
-    double bucketLeftPosition = 0.3;
-    double bucketRightPosition = 0.7;
+    double bucketLeftPosition = 0.2;
+    double bucketRightPosition = 0.8;
 
 //    The position of the servo.
-//     0.2 is down, 0.5 is middle, and 0.9 is up.
-    double cowPosition = 0.2;
+//     0.3 is down, 0.6 is middle, and 0.9 is up.
+    double cowPosition = 0.6;
 
 //    A simplified position method.
 //    1 is down, 2 is middle, and 3 is up
-    int position = 1;
+    int position = 2;
 
 
 //    checks the states of the right bumper and right trigger
@@ -84,20 +84,22 @@ public class Main extends OpMode {
         elbow = hardwareMap.dcMotor.get("elbow");
         wrist = hardwareMap.servo.get("wrist");
         claw = hardwareMap.servo.get("claw");
+
 //      Maps the Shoulder X & Y
         ShoulderX = hardwareMap.dcMotor.get("ShoulderX");
         ShoulderY = hardwareMap.dcMotor.get("ShoulderY");
 
 //      Setting the motors in reverse
-        leftMotorRear.setDirection(DcMotor.Direction.REVERSE);
+        leftMotorFront.setDirection(DcMotor.Direction.REVERSE);
         rightMotorFront.setDirection(DcMotor.Direction.REVERSE);
-
+        elbow.setDirection(DcMotor.Direction.REVERSE);
+        ShoulderY.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void loop() {
 
-//        The left bumper activates upward movement
-//        The left trigger activates downward movement
+//      The left bumper activates upward movement
+//      The left trigger activates downward movement
         boolean bucketUpButton = gamepad1.left_bumper;
         float bucketDownButton = gamepad1.left_trigger;
 
@@ -118,9 +120,6 @@ public class Main extends OpMode {
         double leftY2  = -gamepad2.left_stick_y;
         double leftX2 = -gamepad2.left_stick_x;
 
-//      Clip the position values of wrist so that they never exceed their allowed range.
-        wristPosition = Range.clip(wristPosition, WRIST_MIN_RANGE, WRIST_MAX_RANGE);
-
 //      Squares output of joysticks to create a smaller number; adds more control over DcMotor speed
         rightY2 = Math.pow(rightY2, 2) * Math.signum(rightY2);
         rightY = Math.pow(rightY, 2) * Math.signum(rightY);
@@ -129,40 +128,43 @@ public class Main extends OpMode {
         leftX2 = Math.pow(leftX2, 2) * Math.signum(leftX2);
         rightX2 = Math.pow(rightX2, 2) * Math.signum(rightX2);
 
+//      Wrist position is set to rightY2's output after it transforms the number range from -1-1 to 0-1
+        wristPosition = rightX2/2 + 0.5;
+
+//      Clip the position values of wrist so that they never exceed their allowed range.
+        wristPosition = Range.clip(wristPosition, WRIST_MIN_RANGE, WRIST_MAX_RANGE);
 
 //      Write position values to the wrist & claw servo
 //      Claw open and close
-//        if(gamepad2.right_bumper = true) {
-//            claw.setPosition(0);
-//        }
-//
-//        else {
-//            claw.setPosition(1);
-//        }
+        if(gamepad2.right_bumper == true) {
+            claw.setPosition(0.7);
+        }
+
+        else {
+            claw.setPosition(0);
+        }
 
 //      Wrist Position
-//        if(rightY2 > 0) {
-//            wrist.setPosition(rightY2/2 + 0.5);
-//        }
-//
+        wrist.setPosition(wristPosition);
+
 //      Set power to the elbow & shoulder's X & Y
 //      Elbow DC power
-        elbow.setPower(rightX2);
+        elbow.setPower(-rightY2);
 
 //      ShoulderX
         ShoulderX.setPower(leftX2);
 
 //      ShoulderY
-        ShoulderY.setPower(leftY2);
+        ShoulderY.setPower(-leftY2);
 
-//        Reads the right bumper and trigger to move the bucket
+//        Reads the right bumper and trigger to move the bucket-
         if(bucketUpButton){
             rightButtonState = 1;   //Checks the state of the right button
         }
         else {
             if(rightButtonState == 1) {
                 if(bucketLeftPosition >= 0.2){  //Changes the position of the bucket
-                    bucketLeftPosition -= 0.1;  //The motors are mirrored so they get diffrent values
+                    bucketLeftPosition -= 0.1;  //The motors are mirrored so they get different values
                     bucketRightPosition += 0.1;
                 }
 
@@ -219,7 +221,7 @@ public class Main extends OpMode {
                     position = 2;
                 }
                 else{
-                    cowPosition = 0.2;
+                    cowPosition = 0.3;
                     position = 1;
                 }
 
@@ -253,9 +255,10 @@ public class Main extends OpMode {
         telemetry.addData("leftMotors tgt pwr", "leftMotors  pwr: " + String.format("%.2f", leftY));
         telemetry.addData("rightMotors tgt pwr", "rightMotors  pwr: " + String.format("%.2f", rightY));
         telemetry.addData("Elbow tgt pwr", "Elbow pwr: " + String.format("%.2f", rightX2));
-        telemetry.addData("Wrist tgt pwr", "Wrist pwr: " + String.format("%.2f", rightY2));
+        telemetry.addData("Wrist tgt pwr", "Wrist pwr: " + String.format("%.2f", wristPosition));
         telemetry.addData("ShoulderY tgt pwr", "ShoulderY pwr: " + String.format("%.2f", leftY2));
         telemetry.addData("ShoulderX tgt pwr", "ShoulderX pwr: " + String.format("%.2f", leftX2));
+        telemetry.addData("Claw Position:", "Claw Position:" + String.format("%.2f", claw.getPosition()));
 
 
 

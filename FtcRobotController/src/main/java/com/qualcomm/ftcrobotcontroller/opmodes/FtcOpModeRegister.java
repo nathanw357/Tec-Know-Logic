@@ -62,7 +62,6 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("TKLTeleOp", TKLTeleOp.class);
     manager.register ("SlowTankMode", SlowTankMode.class);
     manager.register("ButtonBucket", ButtonBucket.class);
-    manager.register("Auto", AutonoumousM0B.class);
 
 
 
