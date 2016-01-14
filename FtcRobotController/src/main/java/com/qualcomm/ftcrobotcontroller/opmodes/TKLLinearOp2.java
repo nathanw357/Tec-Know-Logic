@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 public class TKLLinearOp2 extends LinearOpMode {
 
-
     DcMotor leftMotor;
     DcMotor rightMotor;
     DcMotor leftMotor2;

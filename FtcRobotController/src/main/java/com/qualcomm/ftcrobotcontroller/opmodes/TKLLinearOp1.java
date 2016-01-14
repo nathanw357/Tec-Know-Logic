@@ -3,9 +3,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-/**
- * Created by Chris on December 14th, 2015
- */
 public class TKLLinearOp1 extends LinearOpMode {
 
     DcMotor leftMotor;
@@ -83,4 +80,6 @@ public class TKLLinearOp1 extends LinearOpMode {
         leftMotor2.setPower(0);
         rightMotor2.setPower(0);
         }
+
+
 }
