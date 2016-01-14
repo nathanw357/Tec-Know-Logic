@@ -12,6 +12,9 @@ public class Encoder extends LinearOpMode {
     DcMotor leftMotor2;
     DcMotor rightMotor2;
 
+    double LeftTargetPosition;
+    double RightTargetPosition;
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -23,18 +26,17 @@ public class Encoder extends LinearOpMode {
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
         leftMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        waitForStart();
-
-        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        telemetry.clearData();
 
-        telemetry.addData("text", "Run To Position");
+        telemetry.addData("Right Count", rightMotor.getCurrentPosition());
+        telemetry.addData("Left Count", leftMotor.getCurrentPosition());
 
-        leftMotor.setTargetPosition((int) COUNTS(36));
-        rightMotor.setTargetPosition((int) COUNTS(36));
+        waitForStart();
+
+        leftMotor.setTargetPosition((int) MoveRobot(36, 1, 1));
+        rightMotor.setTargetPosition((int) MoveRobot(36, 1, 2));
 
         telemetry.addData("text", "Set Target Position");
 
@@ -42,12 +44,14 @@ public class Encoder extends LinearOpMode {
         rightMotor.setPower(0.5);
         leftMotor2.setPower(0.5);
         rightMotor2.setPower(0.5);
+
         telemetry.addData("text", "Set Power Forward");
 
-        while(rightMotor.getCurrentPosition() < (int) COUNTS(36) - 10) {
+        while(rightMotor.getCurrentPosition() < (int) MoveRobot(36, 1, 1) - 10) {
 
-            telemetry.addData("count", rightMotor.getCurrentPosition());
-            telemetry.addData("Motor Target", COUNTS(36));
+            telemetry.addData("Right Count", rightMotor.getCurrentPosition());
+            telemetry.addData("Left Count", leftMotor.getCurrentPosition());
+            telemetry.addData("Motor Target", MoveRobot(36, 1, 1));
         }
 
         rightMotor.setPowerFloat();
@@ -56,11 +60,22 @@ public class Encoder extends LinearOpMode {
         leftMotor2.setPowerFloat();
 
         telemetry.addData("text", "Set Power Float");
+        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+
+        sleep(1000);
+        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
         telemetry.addData("text", "End");
+
+        telemetry.addData("Right Target Position", rightMotor.getTargetPosition());
+        telemetry.addData("Right Current Position", rightMotor.getCurrentPosition());
+        telemetry.addData("Left Current Position", leftMotor.getCurrentPosition());
     }
 
-    private double COUNTS(double DISTANCE) {
+    private double MoveRobot(double DISTANCE, double DIRECTION, double MOTOR) {
+//      Determine Counts based on distance
         final int ENCODER_CFR = 1440;            //Encoder Counts per Revolution
         final int GEAR_RATIO = 1;             //Gear Ratio
         final double WHEEL_DIAMETER = 3.1715;    //Wheel diameter
@@ -69,7 +84,38 @@ public class Encoder extends LinearOpMode {
         double ROTATIONS = DISTANCE / CIRCUMFERENCE;
         double COUNT = ENCODER_CFR * ROTATIONS * GEAR_RATIO;
 
-        return COUNT;
+//      Forward
+        if(DIRECTION == 1) {
+            LeftTargetPosition = 1 * COUNT;
+            RightTargetPosition = 1 * COUNT;
+        }
 
+//      Reverse
+        else if(DIRECTION == 2) {
+            LeftTargetPosition = -1 * COUNT;
+            RightTargetPosition = -1 * COUNT;
+        }
+
+//      Left
+        else if(DIRECTION == 3) {
+            LeftTargetPosition = -1 * COUNT;
+            RightTargetPosition = 1 * COUNT;
+        }
+
+//      Right
+        else if(DIRECTION == 4) {
+            LeftTargetPosition = 1 * COUNT;
+            RightTargetPosition = -1 * COUNT;
+        }
+
+        if(MOTOR == 2) {
+            return RightTargetPosition;
+        }
+
+        else if(MOTOR == 1) {
+            return LeftTargetPosition;
+        }
+
+        return RightTargetPosition;
     }
 }
