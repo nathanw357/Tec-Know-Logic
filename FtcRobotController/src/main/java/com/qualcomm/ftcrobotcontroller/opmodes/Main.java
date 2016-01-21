@@ -221,7 +221,7 @@ public class Main extends OpMode {
                     position = 2;
                 }
                 else{
-                    cowPosition = 0.3;
+                    cowPosition = 0.3 ;
                     position = 1;
                 }
 
