@@ -55,21 +55,21 @@ public class FtcOpModeRegister implements OpModeRegister {
      * If two or more op modes are registered with the same name, the app will display an error.
      */
 
-    manager.register("CowcatcherTest2", CowcatcherTest2.class);
-    manager.register("EncoderTest", Encoder.class);
-    manager.register("EncoderTestN", EncoderN.class);
+    //manager.register("CowcatcherTest2", CowcatcherTest2.class);
+    //manager.register("EncoderTest", Encoder.class);
+    //manager.register("EncoderTestN", EncoderN.class);
     manager.register("Main", Main.class);
-    manager.register("TKL Linear Op", TKLLinearOp2.class);
-    manager.register("TKLTeleOp", TKLTeleOp.class);
-    manager.register ("SlowTankMode", SlowTankMode.class);
-    manager.register("ButtonBucket", ButtonBucket.class);
+   // manager.register("TKL Linear Op", TKLLinearOp2.class);
+    manager.register("AutoBucketFloorGoal", AutoBucketFloorGoal.class);
+    //manager.register ("SlowTankMode", SlowTankMode.class);
+    //manager.register("ButtonBucket", ButtonBucket.class);
 
 
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.
      */
-    manager.register("MR Gyro Test", MRGyroTest.class);
+    //manager.register("MR Gyro Test", MRGyroTest.class);
 
     //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
     //manager.register("ColorSensorDriver", ColorSensorDriver.class);
