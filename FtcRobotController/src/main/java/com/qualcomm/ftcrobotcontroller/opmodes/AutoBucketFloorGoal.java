@@ -164,10 +164,10 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         return RightTargetPosition;
     }
 
-    private double MoveRobotBack( int rotations){
+    private double MoveRobotBack( int dis){
 
-        leftMotor.setTargetPosition((int) SetMotors(36, 2, 1));
-        rightMotor.setTargetPosition((int) SetMotors(36, 2, 2));
+        leftMotor.setTargetPosition((int) SetMotors(dis, 2, 1));
+        rightMotor.setTargetPosition((int) SetMotors(dis, 2, 2));
 
         telemetry.addData("text", "Set Target Position");
 
@@ -178,7 +178,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
 
         telemetry.addData("text", "Set Power");
 
-        while(rightMotor.getCurrentPosition() > (int) SetMotors(36, 2, 1) + rotations) {
+        while(rightMotor.getCurrentPosition() > (int) SetMotors(36, 2, 1) + 10) {
             telemetry.addData("Right Count", rightMotor.getCurrentPosition());
             telemetry.addData("Left Count", leftMotor.getCurrentPosition());
             telemetry.addData("Motor Target", SetMotors(36, 2, 1));
@@ -189,15 +189,15 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         leftMotor.setPowerFloat();
         leftMotor2.setPowerFloat();
 
-        return rotations;
+        return dis;
 
 
     }
 
-    private double MoveRobotForward(int rotations){
+    private double MoveRobotForward(int dis){
 
-        leftMotor.setTargetPosition((int) SetMotors(36, 1, 1));
-        rightMotor.setTargetPosition((int) SetMotors(36, 1, 2));
+        leftMotor.setTargetPosition((int) SetMotors(dis, 1, 1));
+        rightMotor.setTargetPosition((int) SetMotors(dis, 1, 2));
 
         telemetry.addData("text", "Set Target Position");
 
@@ -208,7 +208,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
 
         telemetry.addData("text", "Set Power");
 
-        while(rightMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - rotations) {
+        while(rightMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - 10) {
             telemetry.addData("Right Count", rightMotor.getCurrentPosition());
             telemetry.addData("Left Count", leftMotor.getCurrentPosition());
             telemetry.addData("Motor Target", SetMotors(36, 1, 1));
@@ -219,14 +219,14 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         leftMotor.setPowerFloat();
         leftMotor2.setPowerFloat();
 
-        return rotations;
+        return dis;
 
 
     }
 
-    private double MoveRobotLeft(int rotations){
+    private double MoveRobotLeft(int dis){
 
-        rightMotor.setTargetPosition((int) SetMotors(36, 1, 2));
+        rightMotor.setTargetPosition((int) SetMotors(dis, 1, 2));
 
         telemetry.addData("text", "Set Target Position");
 
@@ -235,7 +235,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
 
         telemetry.addData("text", "Set Power");
 
-        while(rightMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - rotations) {
+        while(rightMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - 10) {
             telemetry.addData("Right Count", rightMotor.getCurrentPosition());
             telemetry.addData("Motor Target", SetMotors(36, 1, 1));
         }
@@ -243,13 +243,13 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         rightMotor.setPowerFloat();
         rightMotor2.setPowerFloat();
 
-        return rotations;
+        return dis;
 
     }
 
-    private double MoveRobotRight(int rotations){
+    private double MoveRobotRight(int dis){
 
-        leftMotor.setTargetPosition((int) SetMotors(36, 1, 1));
+        leftMotor.setTargetPosition((int) SetMotors(dis, 1, 1));
 
         telemetry.addData("text", "Set Target Position");
 
@@ -258,7 +258,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
 
         telemetry.addData("text", "Set Power");
 
-        while(leftMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - rotations) {
+        while(leftMotor.getCurrentPosition() < (int) SetMotors(36, 1, 1) - 10) {
             telemetry.addData("Left Count", leftMotor.getCurrentPosition());
             telemetry.addData("Motor Target", SetMotors(36, 1, 1));
         }
@@ -266,7 +266,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         leftMotor.setPowerFloat();
         leftMotor2.setPowerFloat();
 
-        return rotations;
+        return dis;
 
     }
 
