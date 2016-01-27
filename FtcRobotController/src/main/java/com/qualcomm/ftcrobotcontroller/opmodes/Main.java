@@ -14,8 +14,8 @@ public class Main extends OpMode {
 
 //    Servo at the base of the bucket
 
-    Servo bucketLeft;
-    Servo bucketRight;
+    Servo bumperLeft;
+    Servo bumperRight;
 
 //    Servo at the base of the cowcatcher
 
@@ -43,8 +43,8 @@ public class Main extends OpMode {
 
 //    The position of the servo.
 
-    double bucketLeftPosition = 0.2;
-    double bucketRightPosition = 0.8;
+    double bumperLeftPosition = 0.2;
+    double bumperRightPosition = 0.8;
 
 //    The position of the servo.
 //     0.3 is down, 0.6 is middle, and 0.9 is up.
@@ -68,8 +68,8 @@ public class Main extends OpMode {
 
 
 //      Maps the bucket servos
-        bucketLeft = hardwareMap.servo.get("bucketLeft");
-        bucketRight = hardwareMap.servo.get("bucketRight");
+        bumperLeft = hardwareMap.servo.get("bucketLeft");
+        bumperRight = hardwareMap.servo.get("bucketRight");
 
 //      Maps the cowcathcer's motor
         cowCatcher = hardwareMap.servo.get("cowCatcher");
@@ -163,10 +163,10 @@ public class Main extends OpMode {
         }
         else {
             if(rightButtonState == 1) {
-                if(bucketLeftPosition >= 0.2){  //Changes the position of the bucket
-                    bucketLeftPosition -= 0.1;  //The motors are mirrored so they get different values
-                    bucketRightPosition += 0.1;
-                }
+                  //Changes the position of the bucket
+                    bumperLeftPosition = 0.1;  //The motors are mirrored so they get different values
+                    bumperRightPosition = 0.9;
+
 
                 rightButtonState = 0; //returns state to 0
             }
@@ -178,10 +178,8 @@ public class Main extends OpMode {
         }
         else{
             if(rightTriggerState == 1){  //If trigger has been pressed and released
-                if(bucketLeftPosition <= 0.9){  //changes the positon of the bucket
-                    bucketLeftPosition += 0.1;
-                    bucketRightPosition -= 0.1;
-                }
+                    bumperLeftPosition = 1;
+                    bumperRightPosition = 0;
 
                 rightTriggerState = 0;
             }
@@ -235,8 +233,8 @@ public class Main extends OpMode {
         }
 
 //      Setting position of bucket
-        bucketLeft.setPosition(bucketLeftPosition);
-        bucketRight.setPosition(bucketRightPosition);
+        bumperLeft.setPosition(bumperLeftPosition);
+        bumperRight.setPosition(bumperRightPosition);
 
 //      Sets position of cowcatcher
         cowCatcher.setPosition(cowPosition);
@@ -250,8 +248,8 @@ public class Main extends OpMode {
 
 //      Telemetry data sent back to driver station
         telemetry.addData("Text", "** Robot Data**");
-        telemetry.addData("leftbucket", "position:  " + String.format("%.2f", bucketLeftPosition));
-        telemetry.addData("rightbucket", "position:" + String.format("%.2f", bucketRightPosition));
+        telemetry.addData("leftbumper", "position:  " + String.format("%.2f", bumperLeftPosition));
+        telemetry.addData("rightbumper", "position:" + String.format("%.2f", bumperRightPosition));
         telemetry.addData("leftMotors tgt pwr", "leftMotors  pwr: " + String.format("%.2f", leftY));
         telemetry.addData("rightMotors tgt pwr", "rightMotors  pwr: " + String.format("%.2f", rightY));
         telemetry.addData("Elbow tgt pwr", "Elbow pwr: " + String.format("%.2f", rightX2));
