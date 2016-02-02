@@ -31,30 +31,33 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         rightMotor2.setDirection(DcMotor.Direction.REVERSE);
         leftMotor.setDirection(DcMotor.Direction.REVERSE);
 
+        sleep(1000);
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-
+        sleep(1000);
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
 
         waitForStart();
 
-        MoveRobotBack(24);
+
+        MoveRobotBack(17);
 
         waitOneFullHardwareCycle();
-        sleep(500);
+        sleep(1000);
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
         waitOneFullHardwareCycle();
-        sleep(500);
+        sleep(1000);
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
         cowCatcher.setPosition(0.3);
 
-        MoveRobotLeftBack(10);
+
+        MoveRobotLeftBack(45);
 
         waitOneFullHardwareCycle();
         sleep(500);
@@ -66,7 +69,7 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        MoveRobotForward(10);
+        MoveRobotForward(85);
 
         waitOneFullHardwareCycle();
         sleep(500);
@@ -78,42 +81,45 @@ public class AutoBucketFloorGoal extends LinearOpMode {
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        MoveRobotBack(1);
-
-        waitOneFullHardwareCycle();
+        MoveRobotRight(10);
         sleep(500);
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-
-        waitOneFullHardwareCycle();
-        sleep(500);
-        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-
-        MoveRobotLeftBack(1);
-
-        waitOneFullHardwareCycle();
-        sleep(500);
-        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-
-        waitOneFullHardwareCycle();
-        sleep(500);
-        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-
-        MoveRobotForward(1);
-
-        waitOneFullHardwareCycle();
-        sleep(500);
-        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-
-        waitOneFullHardwareCycle();
-        sleep(500);
-        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-
+//        MoveRobotBack(1);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+//
+//        MoveRobotLeftBack(1);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+//
+//        MoveRobotForward(1);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+//
+//        waitOneFullHardwareCycle();
+//        sleep(500);
+//        leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+//        rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
     }
 
@@ -233,9 +239,9 @@ public class AutoBucketFloorGoal extends LinearOpMode {
 
         telemetry.addData("text", "Set Power");
 
-        while(rightMotor.getCurrentPosition() < (int) SetMotors(dis, 1, 1) - 10) {
+        while(rightMotor.getCurrentPosition() < (int) SetMotors(dis, 1, 2) - 10) {
             telemetry.addData("Right Count", rightMotor.getCurrentPosition());
-            telemetry.addData("Motor Target", SetMotors(dis, 1, 1));
+            telemetry.addData("Motor Target", SetMotors(dis, 1, 2));
         }
 
         rightMotor.setPowerFloat();

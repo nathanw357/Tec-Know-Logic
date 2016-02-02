@@ -158,11 +158,11 @@ public class Main extends OpMode {
         ShoulderY.setPower(-leftY2);
 
 //        Reads the right bumper and trigger to move the bucket-
-        if(bucketUpButton){
-            rightButtonState = 1;   //Checks the state of the right button
+        if(bucketUpButton){   //Checks if right bumper is pressed
+            rightButtonState = 1;  //Sets buttonState to 1
         }
         else {
-            if(rightButtonState == 1) {
+            if(rightButtonState == 1) {    //Checks the state of the right button
                   //Changes the position of the bucket
                     bumperLeftPosition = 0.1;  //The motors are mirrored so they get different values
                     bumperRightPosition = 0.9;
@@ -178,55 +178,57 @@ public class Main extends OpMode {
         }
         else{
             if(rightTriggerState == 1){  //If trigger has been pressed and released
-                    bumperLeftPosition = 1;
+                    bumperLeftPosition = 1;   //Set bumper position to down
                     bumperRightPosition = 0;
 
                 rightTriggerState = 0;
             }
         }
 
+        //If both are pressed set both to 0
         if(rightTriggerState == 1 && rightButtonState == 1){
             rightTriggerState = 0;
             rightButtonState = 0;
         }
 
-        if(cowUpButton){
-            leftButtonState = 1;
+        if(cowUpButton){   //Checks to see if left bumper has been pressed
+            leftButtonState = 1;   //Sets button state to 1
         }
         else {
-            if(leftButtonState == 1) {
-                if (position == 1) {
-                    cowPosition = 0.6;
+            if(leftButtonState == 1) {   //Checks button state
+                if (position == 1) {    //Checks current position of cowcatcher
+                    cowPosition = 0.6;  //Sets cowcatcher's postion
                     position = 2;
                 }
-                else {
-                    cowPosition = 0.9;
+                else {                  //Checks current position of cowCatcher
+                    cowPosition = 0.9;  //Sets cowcatcher's postion
                     position = 3;
                 }
 
-                leftButtonState = 0;
+                leftButtonState = 0;    //Set button state to zero
             }
         }
 
 
-        if(cowDownButton >= 0.9){
-            leftTriggerState = 1;
+        if(cowDownButton >= 0.9){    //Checks to see if left trigger has been pressed
+            leftTriggerState = 1;    //Sets button state to 1
         }
         else{
             if(leftTriggerState == 1){
-                if(position == 3){
-                    cowPosition = 0.6;
+                if(position == 3){          //Checks current position of cowcatcher
+                    cowPosition = 0.6;      //Sets cowcatcher's postion
                     position = 2;
                 }
-                else{
-                    cowPosition = 0.3 ;
+                else{                       //Checks current position of cowcatcher
+                    cowPosition = 0.3 ;     //Sets cowcatcher's postion
                     position = 1;
                 }
 
-                leftTriggerState = 0;
+                leftTriggerState = 0;      //Set button state to zero
             }
         }
 
+        //If both trigger and bumper pressed sets both state to 0
         if(leftTriggerState == 1 && leftButtonState == 1){
             leftTriggerState = 0;
             leftButtonState = 0;
