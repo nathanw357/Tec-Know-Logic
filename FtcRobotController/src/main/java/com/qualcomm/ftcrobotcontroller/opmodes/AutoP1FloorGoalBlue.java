@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class AutoBucketFloorGoal extends LinearOpMode {
+public class AutoP1FloorGoalBlue extends LinearOpMode {
 
     DcMotor leftMotor;
     DcMotor rightMotor;
