@@ -60,7 +60,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("EncoderTestN", EncoderN.class);
     manager.register("Main", Main.class);
    // manager.register("TKL Linear Op", TKLLinearOp2.class);
-    manager.register("AutoBucketFloorGoal", AutoBucketFloorGoal.class);
+    manager.register("AutoP1FloorGoalBlue", AutoP1FloorGoalBlue.class);
+    manager.register("AutoP1FloorGoalRed", AutoP1FloorGoalRed.class);
     //manager.register ("SlowTankMode", SlowTankMode.class);
     //manager.register("ButtonBucket", ButtonBucket.class);
 

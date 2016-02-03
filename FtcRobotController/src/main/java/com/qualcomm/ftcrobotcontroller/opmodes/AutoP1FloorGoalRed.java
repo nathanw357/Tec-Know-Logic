@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class AutoP1FloorGoalBlue extends LinearOpMode {
+public class AutoP1FloorGoalRed extends LinearOpMode {
 
     DcMotor leftMotor;
     DcMotor rightMotor;
@@ -80,7 +80,7 @@ public class AutoP1FloorGoalBlue extends LinearOpMode {
         cowCatcher.setPosition(0.3);
 
 
-        MoveRobotLeftBack(47);
+        MoveRobotRightBack(47);
 
         waitOneFullHardwareCycle();
         sleep(500);
@@ -104,7 +104,7 @@ public class AutoP1FloorGoalBlue extends LinearOpMode {
         leftMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         rightMotor.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        MoveRobotRight(46);
+        MoveRobotLeftForward(46);
 
         sleep(500);
         leftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
@@ -261,24 +261,24 @@ public class AutoP1FloorGoalBlue extends LinearOpMode {
 
     }
 
-    private double MoveRobotLeftBack(int dis) {
+    private double MoveRobotRightBack(int dis) {
 
-        leftMotor.setTargetPosition((int) SetMotors(dis, 2, 1));
+        rightMotor.setTargetPosition((int) SetMotors(dis, 2, 1));
 
         telemetry.addData("text", "Set Target Position");
 
-        leftMotor.setPower(-0.5);
-        leftMotor2.setPower(-0.5);
+        rightMotor.setPower(-0.5);
+        rightMotor2.setPower(-0.5);
 
         telemetry.addData("text", "Set Power");
 
-        while (leftMotor.getCurrentPosition() > (int) SetMotors(dis, 2, 1) + 10) {
-            telemetry.addData("Left Count", leftMotor.getCurrentPosition());
+        while (rightMotor.getCurrentPosition() > (int) SetMotors(dis, 2, 1) + 10) {
+            telemetry.addData("Left Count", rightMotor.getCurrentPosition());
             telemetry.addData("Motor Target", SetMotors(dis, 2, 1));
         }
 
-        leftMotor.setPowerFloat();
-        leftMotor2.setPowerFloat();
+        rightMotor.setPowerFloat();
+        rightMotor2.setPowerFloat();
 
         return dis;
     }
